@@ -1,0 +1,10 @@
+build/
+dist/
+nbproject/
+  build-impl.xml
+  private/
+  project.properties
+  project.xml
+test/
+build.xml
+manifest.mf
