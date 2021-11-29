@@ -6,7 +6,7 @@
 package utils;
 
 import java.sql.Connection;
-import com.mysql.jdbc.Driver;
+import com.mysql.cj.jdbc.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
