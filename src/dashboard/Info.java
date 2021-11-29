@@ -42,7 +42,7 @@ public class Info extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_dashboard_logo_black.png"))); // NOI18N
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Version 0.69");
+        jLabel2.setText("Alpha Build");
 
         jButton1.setBackground(new java.awt.Color(0, 178, 255));
         jButton1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
