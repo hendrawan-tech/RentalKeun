@@ -23,6 +23,8 @@ public class Functions {
     private static final String USER = "rentalkeun";
     private static final String PASSWORD = "Bismillah5758";
     private static final String URL = "jdbc:mysql://db4free.net:3306/" + DB_NAME;
+    
+    private static String email;
 
     public static Connection configDB() throws SQLException {
         DriverManager.registerDriver(new Driver());
@@ -46,5 +48,12 @@ public class Functions {
     public static void main(String[] args) {
         isConnected();
     }
-
+    
+    public static String get_email() {
+        return email;
+    }
+    
+    public static void set_email(String data) {
+        email = data;
+    }
 }
