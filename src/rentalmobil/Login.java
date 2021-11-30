@@ -9,6 +9,7 @@ import dashboard.Home;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import utils.Functions;
+
 /**
  *
  * @author Umam
@@ -235,9 +236,9 @@ public class Login extends javax.swing.JFrame {
             if (result.next()) {
                 if (email.equals(result.getString("email")) && password.equals(result.getString("password"))) {
                     Functions.set_email(result.getString("email"));
-                    System.out.println(Functions.get_email());
+                    System.out.println(result.getString("role"));
                     JOptionPane.showMessageDialog(null, "Berhasil Login");
-                    if (result.getString("role") == "Member") {
+                    if ("Admin".equals(result.getString("role"))) {
                         this.setVisible(false);
                         new Home().setVisible(true);
                     } else {
