@@ -5,6 +5,11 @@
  */
 package rentalmobil;
 
+import dashboard.Home;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+import utils.Functions;
+
 /**
  *
  * @author Umam
@@ -30,11 +35,11 @@ public class Login extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        Emailbox = new javax.swing.JTextField();
+        txt_email = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        Passbox = new javax.swing.JTextField();
+        txt_password = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        LoginButton = new javax.swing.JButton();
+        btn_login = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         DaftarAkun = new javax.swing.JButton();
@@ -52,14 +57,20 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 178, 255));
         jPanel2.setForeground(new java.awt.Color(0, 178, 255));
 
+        txt_email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_emailActionPerformed(evt);
+            }
+        });
+
         jLabel2.setBackground(new java.awt.Color(0, 178, 255));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Email");
 
-        Passbox.addActionListener(new java.awt.event.ActionListener() {
+        txt_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PassboxActionPerformed(evt);
+                txt_passwordActionPerformed(evt);
             }
         });
 
@@ -68,10 +79,15 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Password");
 
-        LoginButton.setBackground(new java.awt.Color(255, 255, 255));
-        LoginButton.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        LoginButton.setText("Log In");
-        LoginButton.setBorderPainted(false);
+        btn_login.setBackground(new java.awt.Color(255, 255, 255));
+        btn_login.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        btn_login.setText("Log In");
+        btn_login.setBorderPainted(false);
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         jLabel5.setBackground(new java.awt.Color(0, 178, 255));
         jLabel5.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
@@ -119,11 +135,11 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Passbox, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
-                                .addComponent(Emailbox)
+                                .addComponent(txt_email)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btn_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -134,13 +150,13 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(3, 3, 3)
-                .addComponent(Emailbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Passbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LoginButton)
+                .addComponent(btn_login)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -195,13 +211,48 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PassboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassboxActionPerformed
+    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PassboxActionPerformed
+    }//GEN-LAST:event_txt_passwordActionPerformed
 
     private void DaftarAkunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DaftarAkunActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DaftarAkunActionPerformed
+
+    private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_emailActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        try {
+            String email = txt_email.getText();
+            String password = txt_password.getText();
+
+            String query = "SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'";
+            java.sql.Connection conn = Functions.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(query);
+            java.sql.ResultSet result = pst.executeQuery(query);
+
+            if (result.next()) {
+                if (email.equals(result.getString("email")) && password.equals(result.getString("password"))) {
+                    Functions.set_email(result.getString("email"));
+                    System.out.println(result.getString("role"));
+                    JOptionPane.showMessageDialog(null, "Berhasil Login");
+                    if ("Admin".equals(result.getString("role"))) {
+                        this.setVisible(false);
+                        new Home().setVisible(true);
+                    } else {
+                        this.setVisible(false);
+                        new Profile_().setVisible(true);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Email atau Password Salah");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,9 +291,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DaftarAkun;
-    private javax.swing.JTextField Emailbox;
-    private javax.swing.JButton LoginButton;
-    private javax.swing.JTextField Passbox;
+    private javax.swing.JButton btn_login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -253,5 +302,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txt_email;
+    private javax.swing.JTextField txt_password;
     // End of variables declaration//GEN-END:variables
 }
