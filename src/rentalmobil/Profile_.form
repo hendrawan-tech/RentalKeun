@@ -34,28 +34,30 @@
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="68" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="1" min="-2" pref="263" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" alignment="1" min="-2" pref="263" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jTextField1" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="jTextField2" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="jTextField4" min="-2" pref="241" max="-2" attributes="0"/>
+                              <Component id="jTextField5" min="-2" pref="241" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField1" min="-2" pref="241" max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="241" max="-2" attributes="0"/>
-                          <Component id="jTextField4" min="-2" pref="241" max="-2" attributes="0"/>
-                          <Component id="jTextField5" min="-2" pref="241" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -67,8 +69,8 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel12" min="-2" pref="140" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
@@ -255,6 +257,9 @@
           <Image iconType="2" name="C:\Users\Ivanka\Pictures\Download\sad.jpg"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jLabel12AncestorAdded"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Events>
