@@ -212,12 +212,14 @@ public class Register extends javax.swing.JFrame {
             java.sql.Connection conn = Functions.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(user);
             pst.executeUpdate(user);
-            String query2 = "SELECT * FROM users";
+            String query2 = "SELECT * FROM users ORDER BY id_user DESC";
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query2);
-            String query3 = "INSERT INTO user_meta (user_id) VALUES ('" + rs.getString(1) + "')";
-            PreparedStatement pst2 = conn.prepareStatement(query3);
-            pst2.execute();
+            if (rs.next()) {
+                String query3 = "INSERT INTO user_meta (user_id) VALUES ('" + rs.getString(1) + "')";
+                PreparedStatement pst2 = conn.prepareStatement(query3);
+                pst2.execute();
+            }
             JOptionPane.showMessageDialog(null, "Berhasil Register");
             this.setVisible(false);
             new Login().setVisible(true);
