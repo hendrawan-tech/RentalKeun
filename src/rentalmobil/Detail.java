@@ -57,7 +57,6 @@ public class Detail extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        jButton9 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -215,8 +214,6 @@ public class Detail extends javax.swing.JFrame {
         jTextPane1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed et eget. Imperdiet mi, euismod ac lacus platea nec\n, vitae scelerisque. Lectus fringilla nam enim pellentesque massa.Lorem ipsum dolor sit amet\n, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla. Cras elementum adipiscing diam \nsed et eget. Imperdiet mi, euismod ac lacus platea nec, vitae scelerisque. Lectus fringilla nam \n");
         jScrollPane2.setViewportView(jTextPane1);
 
-        jButton9.setText("jButton8");
-
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivanka\\Documents\\Semester 1\\workshop pengembangan perangkat lunak\\New folder\\Rectangle 53.png")); // NOI18N
 
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivanka\\Documents\\Semester 1\\workshop pengembangan perangkat lunak\\New folder\\Rectangle 15.png")); // NOI18N
@@ -243,10 +240,6 @@ public class Detail extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(719, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1302, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,7 +270,7 @@ public class Detail extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1563, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,9 +301,7 @@ public class Detail extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(416, 416, 416)
-                .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(2017, 2017, 2017))
+                .addContainerGap(2472, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -439,7 +430,6 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
