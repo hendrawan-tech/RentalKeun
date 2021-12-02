@@ -52,6 +52,7 @@ public class Mobil extends javax.swing.JFrame {
         model.addColumn("No Polisi");
         model.addColumn("Gambar");
         model.addColumn("Merk");
+        model.addColumn("Deskripsi");
 
         int no = 1;
         String sql = "SELECT * FROM mobil";
@@ -60,7 +61,8 @@ public class Mobil extends javax.swing.JFrame {
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6)});
+                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3), 
+                    res.getString(4), res.getString(5), res.getString(6), res.getString(7)});
             }
             jTable1.setModel(model);
         } catch (SQLException ex) {
@@ -120,6 +122,9 @@ public class Mobil extends javax.swing.JFrame {
         clearBtn = new javax.swing.JButton();
         pilihBtn = new javax.swing.JButton();
         previewGambar = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        deskripsiField = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mobil - Rentalkeun Dashboard");
@@ -231,7 +236,7 @@ public class Mobil extends javax.swing.JFrame {
                             .addComponent(userBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel2)))
@@ -260,7 +265,7 @@ public class Mobil extends javax.swing.JFrame {
                 .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -362,6 +367,14 @@ public class Mobil extends javax.swing.JFrame {
 
         previewGambar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        deskripsiField.setColumns(20);
+        deskripsiField.setLineWrap(true);
+        deskripsiField.setRows(5);
+        jScrollPane2.setViewportView(deskripsiField);
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Deskripsi");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -370,34 +383,12 @@ public class Mobil extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel8)
-                                                .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel9)
-                                                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel5)
-                                                .addComponent(jLabel6)
-                                                .addComponent(namaMobilField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                                .addComponent(hargaSewaField)
-                                                .addComponent(noPolisiField)))
-                                        .addGap(89, 89, 89)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel7)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(19, 19, 19)
-                                                .addComponent(pilihBtn)))))
-                                .addContainerGap(83, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(tambahBtn)
                                 .addGap(42, 42, 42)
@@ -405,12 +396,34 @@ public class Mobil extends javax.swing.JFrame {
                                 .addGap(42, 42, 42)
                                 .addComponent(editBtn)
                                 .addGap(42, 42, 42)
-                                .addComponent(clearBtn)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(clearBtn))
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel9)
+                                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(namaMobilField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                            .addComponent(hargaSewaField)
+                                            .addComponent(noPolisiField)))
+                                    .addGap(89, 89, 89)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(19, 19, 19)
+                                            .addComponent(pilihBtn))))))
+                        .addContainerGap(66, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,26 +462,30 @@ public class Mobil extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pilihBtn))))
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahBtn)
                     .addComponent(hapusBtn)
                     .addComponent(editBtn)
                     .addComponent(clearBtn))
-                .addGap(21, 21, 21)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -502,20 +519,19 @@ public class Mobil extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Text Field Nama Mobil Tidak Boleh Kosong!");
             } else if (hargaSewaField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Harga Sewa Tidak Boleh Kosong!");
-
             } else if (noPolisiField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field No Polisi Tidak Boleh Kosong!");
-
             } else if (gambarField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Gambar Tidak Boleh Kosong!");
-
             } else if (merkField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Merk Tidak Boleh Kosong!");
-
+            } else if (deskripsiField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Text Area Deskripsi Tidak Boleh Kosong!");
             } else {
-                String query = "INSERT INTO mobil (nama_mobil, harga_sewa, no_polisi, gambar, merk) VALUES "
+                String query = "INSERT INTO mobil (nama_mobil, harga_sewa, no_polisi, gambar, merk, deskripsi) VALUES "
                         + "('" + namaMobilField.getText() + "', " + hargaSewaField.getText() + ", '"
-                        + noPolisiField.getText() + "', '" + gambarField.getText() + "', '" + merkField.getText() + "')";
+                        + noPolisiField.getText() + "', '" + gambarField.getText() + "', '" + merkField.getText() + "', "
+                        + "'" + deskripsiField.getText() + "')";
                 Connection conn = (Connection) Functions.configDB();
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
@@ -533,7 +549,7 @@ public class Mobil extends javax.swing.JFrame {
         try {
             String query = "UPDATE mobil SET nama_mobil='" + namaMobilField.getText() + "', "
                     + "harga_sewa=" + hargaSewaField.getText() + ", no_polisi='" + noPolisiField.getText() + "', "
-                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "' WHERE id_mobil=" + idField.getText();
+                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "', '" + deskripsiField.getText() + "' WHERE id_mobil=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
@@ -628,6 +644,11 @@ public class Mobil extends javax.swing.JFrame {
         } else {
             merkField.setText(jTable1.getValueAt(baris, 6).toString());
         }
+        if (jTable1.getValueAt(baris, 7) == null) {
+            deskripsiField.setText("");
+        } else {
+            deskripsiField.setText(jTable1.getValueAt(baris, 7).toString());
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
@@ -693,6 +714,7 @@ public class Mobil extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearBtn;
+    private javax.swing.JTextArea deskripsiField;
     private javax.swing.JButton editBtn;
     private javax.swing.JTextField gambarField;
     private javax.swing.JButton hapusBtn;
@@ -700,6 +722,7 @@ public class Mobil extends javax.swing.JFrame {
     private javax.swing.JButton homeBtn;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -711,6 +734,7 @@ public class Mobil extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField merkField;
