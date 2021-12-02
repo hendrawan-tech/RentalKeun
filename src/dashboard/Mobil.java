@@ -599,7 +599,7 @@ public class Mobil extends javax.swing.JFrame {
             String format_tanggal = "yyyyMMddhhmmss";
             SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
             String tanggal = String.valueOf(df.format(tanggal_update));
-            destinationFile = new File(newpath + "/mobil-" + tanggal.toString() + "." + extension);
+            destinationFile = new File(newpath + "/mobil-" + tanggal + "." + extension);
             String destFile = destinationFile.toString();
             String[] iconPath = destFile.split("src");
             gambarField.setText(iconPath[1]);

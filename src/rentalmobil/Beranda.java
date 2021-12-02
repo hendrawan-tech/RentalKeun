@@ -19,15 +19,20 @@ import rentalmobil.Login;
  *
  * @author tohsaka
  */
-public class Home extends javax.swing.JFrame {
+public class Beranda extends javax.swing.JFrame {
 
     /**
      * Creates new form Payment
      */
-    public Home() throws SQLException {
-        initComponents();
+    public Beranda() throws SQLException {
+        if (Functions.get_email() == null) {
+            JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
+            System.exit(0);
+        } else {
+            initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        }
     }
 
     /**
@@ -42,10 +47,10 @@ public class Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        homeBtn = new javax.swing.JButton();
-        mobilBtn = new javax.swing.JButton();
-        paymentBtn = new javax.swing.JButton();
+        berandaBtn = new javax.swing.JButton();
         promoBtn = new javax.swing.JButton();
+        transaksiBtn = new javax.swing.JButton();
+        profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,46 +68,51 @@ public class Home extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_dashboard_logo.png"))); // NOI18N
 
-        homeBtn.setBackground(new java.awt.Color(76, 196, 255));
-        homeBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        homeBtn.setForeground(new java.awt.Color(255, 255, 255));
-        homeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_home.png"))); // NOI18N
-        homeBtn.setText("Beranda");
-        homeBtn.setBorderPainted(false);
-        homeBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        homeBtn.setIconTextGap(10);
-
-        mobilBtn.setBackground(new java.awt.Color(76, 196, 255));
-        mobilBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        mobilBtn.setForeground(new java.awt.Color(255, 255, 255));
-        mobilBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        mobilBtn.setText("Promo");
-        mobilBtn.setBorderPainted(false);
-        mobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        mobilBtn.setIconTextGap(10);
-        mobilBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mobilBtnActionPerformed(evt);
-            }
-        });
-
-        paymentBtn.setBackground(new java.awt.Color(76, 196, 255));
-        paymentBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        paymentBtn.setForeground(new java.awt.Color(255, 255, 255));
-        paymentBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_payment.png"))); // NOI18N
-        paymentBtn.setText("Transaksi");
-        paymentBtn.setBorderPainted(false);
-        paymentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        paymentBtn.setIconTextGap(10);
+        berandaBtn.setBackground(new java.awt.Color(76, 196, 255));
+        berandaBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        berandaBtn.setForeground(new java.awt.Color(255, 255, 255));
+        berandaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_home.png"))); // NOI18N
+        berandaBtn.setText("Beranda");
+        berandaBtn.setBorderPainted(false);
+        berandaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        berandaBtn.setIconTextGap(10);
 
         promoBtn.setBackground(new java.awt.Color(76, 196, 255));
         promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_user.png"))); // NOI18N
-        promoBtn.setText("User");
+        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
+        promoBtn.setText("Promo");
         promoBtn.setBorderPainted(false);
         promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         promoBtn.setIconTextGap(10);
+        promoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                promoBtnActionPerformed(evt);
+            }
+        });
+
+        transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
+        transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
+        transaksiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_payment.png"))); // NOI18N
+        transaksiBtn.setText("Transaksi");
+        transaksiBtn.setBorderPainted(false);
+        transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        transaksiBtn.setIconTextGap(10);
+
+        profileBtn.setBackground(new java.awt.Color(76, 196, 255));
+        profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        profileBtn.setForeground(new java.awt.Color(255, 255, 255));
+        profileBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_user.png"))); // NOI18N
+        profileBtn.setText("Profile");
+        profileBtn.setBorderPainted(false);
+        profileBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        profileBtn.setIconTextGap(10);
+        profileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileBtnActionPerformed(evt);
+            }
+        });
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -137,10 +147,10 @@ public class Home extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(mobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(paymentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -156,13 +166,13 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(33, 33, 33)
-                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(profileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -177,8 +187,6 @@ public class Home extends javax.swing.JFrame {
 
         bannerPromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/banner_promo (1).png"))); // NOI18N
         bannerPromo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bannerPromo.setMaximumSize(new java.awt.Dimension(411, 189));
-        bannerPromo.setMinimumSize(new java.awt.Dimension(411, 189));
         bannerPromo.setPreferredSize(new java.awt.Dimension(411, 200));
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -242,24 +250,36 @@ public class Home extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
+        Functions.set_email(null);
         this.setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void mobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilBtnActionPerformed
+    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Mobil().setVisible(true);
-    }//GEN-LAST:event_mobilBtnActionPerformed
+        new Promo().setVisible(true);
+    }//GEN-LAST:event_promoBtnActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Info().setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Profile().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_profileBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,14 +298,30 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -307,9 +343,9 @@ public class Home extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Home().setVisible(true);
+                    new Beranda().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -317,7 +353,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bannerPromo;
-    private javax.swing.JButton homeBtn;
+    private javax.swing.JButton berandaBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,8 +363,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JButton mobilBtn;
-    private javax.swing.JButton paymentBtn;
+    private javax.swing.JButton profileBtn;
     private javax.swing.JButton promoBtn;
+    private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }
