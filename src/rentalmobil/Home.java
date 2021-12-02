@@ -106,7 +106,6 @@ public class Home extends javax.swing.JFrame {
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        logoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_exit.png"))); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.setBorderPainted(false);
@@ -177,8 +176,6 @@ public class Home extends javax.swing.JFrame {
 
         bannerPromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/banner_promo (1).png"))); // NOI18N
         bannerPromo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bannerPromo.setMaximumSize(new java.awt.Dimension(411, 189));
-        bannerPromo.setMinimumSize(new java.awt.Dimension(411, 189));
         bannerPromo.setPreferredSize(new java.awt.Dimension(411, 200));
 
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
