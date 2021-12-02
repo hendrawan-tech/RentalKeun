@@ -429,7 +429,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/ICON/Rectangle 15.png"/>
+                      <Image iconType="3" name="/ICON/Rectangle 15_1.png"/>
                     </Property>
                   </Properties>
                 </Component>

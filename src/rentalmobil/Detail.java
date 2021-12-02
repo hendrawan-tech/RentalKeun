@@ -218,7 +218,7 @@ public class Detail extends javax.swing.JFrame {
         jTextPane1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed et eget. Imperdiet mi, euismod ac lacus platea nec\n, vitae scelerisque. Lectus fringilla nam enim pellentesque massa.Lorem ipsum dolor sit amet\n, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla. Cras elementum adipiscing diam \nsed et eget. Imperdiet mi, euismod ac lacus platea nec, vitae scelerisque. Lectus fringilla nam \n");
         jScrollPane2.setViewportView(jTextPane1);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 15.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 15_1.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setText("Nama Mobil");
