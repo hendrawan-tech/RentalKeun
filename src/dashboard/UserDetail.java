@@ -4,6 +4,9 @@
  */
 package dashboard;
 
+import java.awt.Image;
+import java.io.File;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import utils.Functions;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,12 +24,12 @@ import rentalmobil.Login;
  *
  * @author tohsaka
  */
-public class User extends javax.swing.JFrame {
+public class UserDetail extends javax.swing.JFrame {
 
     /**
      * Creates new form Payment
      */
-    public User() {
+    public UserDetail() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -54,7 +58,7 @@ public class User extends javax.swing.JFrame {
             }
             jTable1.setModel(model);
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -453,7 +457,7 @@ public class User extends javax.swing.JFrame {
         try {
             new Home().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_homeBtnActionPerformed
 
@@ -472,23 +476,15 @@ public class User extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Text Field Password Sewa Tidak Boleh Kosong!");
             } else if (namaField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Nama Tidak Boleh Kosong!");
-            } else if (role == null) {
+            } else if (!adminRole.isSelected() || !memberRole.isSelected()) {
                 JOptionPane.showMessageDialog(null, "Anda Harus Memilih Role!");
             } else {
-                Connection conn = (Connection) Functions.configDB();
                 String query = "INSERT INTO users (nama, email, password, role) VALUES "
                         + "('" + namaField.getText() + "', '" + emailField.getText() + "', '"
                         + passwordField.getText() + "', '" + role + "')";
+                Connection conn = (Connection) Functions.configDB();
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
-                String query2 = "SELECT * FROM users";
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query2);
-                while (rs.next()) {
-                    String query3 = "INSERT INTO user_meta (user_id) VALUES ('" + rs.getString(1) + "')";
-                    PreparedStatement pst2 = conn.prepareStatement(query3);
-                    pst2.execute();
-                }
                 JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
                 clear();
                 loadTable();
@@ -585,14 +581,22 @@ public class User extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -605,7 +609,7 @@ public class User extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new User().setVisible(true);
+                new UserDetail().setVisible(true);
             }
         });
     }

@@ -20,12 +20,12 @@ import rentalmobil.Login;
  *
  * @author tohsaka
  */
-public class User extends javax.swing.JFrame {
+public class Promo extends javax.swing.JFrame {
 
     /**
      * Creates new form Payment
      */
-    public User() {
+    public Promo() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
@@ -54,15 +54,15 @@ public class User extends javax.swing.JFrame {
             }
             jTable1.setModel(model);
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Promo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     private void clear() {
-        emailField.setText(null);
-        passwordField.setText(null);
-        namaField.setText(null);
+        idMobilField.setText(null);
+        hargaPromoField.setText(null);
+        namaPromoField.setText(null);
         idField.setText(null);
         adminRole.setSelected(true);
     }
@@ -90,10 +90,10 @@ public class User extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
+        idMobilField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        namaField = new javax.swing.JTextField();
+        namaPromoField = new javax.swing.JTextField();
         tambahBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -103,9 +103,10 @@ public class User extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         adminRole = new javax.swing.JRadioButton();
         memberRole = new javax.swing.JRadioButton();
-        passwordField = new javax.swing.JPasswordField();
+        hargaPromoField = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         idField = new javax.swing.JTextField();
+        cariBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User - Rentalkeun Dashboard");
@@ -166,6 +167,11 @@ public class User extends javax.swing.JFrame {
         userBtn.setBorderPainted(false);
         userBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         userBtn.setIconTextGap(10);
+        userBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userBtnActionPerformed(evt);
+            }
+        });
 
         transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
         transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -248,16 +254,16 @@ public class User extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Menu User");
+        jLabel1.setText("Menu Promo");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Email");
+        jLabel4.setText("Id Mobil");
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Password");
+        jLabel5.setText("Harga Promo");
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Nama");
+        jLabel7.setText("Nama Promo");
 
         tambahBtn.setBackground(new java.awt.Color(0, 255, 71));
         tambahBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -322,7 +328,7 @@ public class User extends javax.swing.JFrame {
         });
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Role");
+        jLabel10.setText("Status");
 
         roleGroup.add(adminRole);
         adminRole.setSelected(true);
@@ -332,7 +338,10 @@ public class User extends javax.swing.JFrame {
         memberRole.setText("Member");
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Id");
+        jLabel6.setText("Id Promo");
+
+        cariBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        cariBtn.setText("Cari");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -362,12 +371,15 @@ public class User extends javax.swing.JFrame {
                                     .addComponent(idField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(hargaPromoField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(idMobilField, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cariBtn)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(namaPromoField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(adminRole)
@@ -390,11 +402,13 @@ public class User extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(idMobilField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cariBtn)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(namaPromoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -406,7 +420,7 @@ public class User extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(hargaPromoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -453,7 +467,7 @@ public class User extends javax.swing.JFrame {
         try {
             new Home().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Promo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_homeBtnActionPerformed
 
@@ -466,29 +480,21 @@ public class User extends javax.swing.JFrame {
             role = "Member";
         }
         try {
-            if (emailField.getText().isEmpty()) {
+            if (idMobilField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Email Mobil Tidak Boleh Kosong!");
-            } else if (passwordField.getText().isEmpty()) {
+            } else if (hargaPromoField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Password Sewa Tidak Boleh Kosong!");
-            } else if (namaField.getText().isEmpty()) {
+            } else if (namaPromoField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Field Nama Tidak Boleh Kosong!");
             } else if (role == null) {
                 JOptionPane.showMessageDialog(null, "Anda Harus Memilih Role!");
             } else {
-                Connection conn = (Connection) Functions.configDB();
                 String query = "INSERT INTO users (nama, email, password, role) VALUES "
-                        + "('" + namaField.getText() + "', '" + emailField.getText() + "', '"
-                        + passwordField.getText() + "', '" + role + "')";
+                        + "('" + namaPromoField.getText() + "', '" + idMobilField.getText() + "', '"
+                        + hargaPromoField.getText() + "', '" + role + "')";
+                Connection conn = (Connection) Functions.configDB();
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
-                String query2 = "SELECT * FROM users";
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query2);
-                while (rs.next()) {
-                    String query3 = "INSERT INTO user_meta (user_id) VALUES ('" + rs.getString(1) + "')";
-                    PreparedStatement pst2 = conn.prepareStatement(query3);
-                    pst2.execute();
-                }
                 JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
                 clear();
                 loadTable();
@@ -507,8 +513,8 @@ public class User extends javax.swing.JFrame {
             role = "Member";
         }
         try {
-            String query = "UPDATE users SET nama='" + namaField.getText() + "', "
-                    + "email='" + emailField.getText() + "', password='" + passwordField.getText() + "', "
+            String query = "UPDATE users SET nama='" + namaPromoField.getText() + "', "
+                    + "email='" + idMobilField.getText() + "', password='" + hargaPromoField.getText() + "', "
                     + "role='" + role + "' WHERE id_user=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
@@ -532,19 +538,19 @@ public class User extends javax.swing.JFrame {
         String id = jTable1.getValueAt(baris, 1).toString();
         idField.setText(id);
         if (jTable1.getValueAt(baris, 2) == null) {
-            namaField.setText("");
+            namaPromoField.setText("");
         } else {
-            namaField.setText(jTable1.getValueAt(baris, 2).toString());
+            namaPromoField.setText(jTable1.getValueAt(baris, 2).toString());
         }
         if (jTable1.getValueAt(baris, 3) == null) {
-            emailField.setText("");
+            idMobilField.setText("");
         } else {
-            emailField.setText(jTable1.getValueAt(baris, 3).toString());
+            idMobilField.setText(jTable1.getValueAt(baris, 3).toString());
         }
         if (jTable1.getValueAt(baris, 4) == null) {
-            passwordField.setText("");
+            hargaPromoField.setText("");
         } else {
-            passwordField.setText(jTable1.getValueAt(baris, 4).toString());
+            hargaPromoField.setText(jTable1.getValueAt(baris, 4).toString());
         }
         if (jTable1.getValueAt(baris, 5).equals("Admin")) {
             adminRole.setSelected(true);
@@ -568,6 +574,12 @@ public class User extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hapusBtnActionPerformed
 
+    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new User().setVisible(true);
+    }//GEN-LAST:event_userBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -585,14 +597,22 @@ public class User extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Promo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Promo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Promo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(User.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Promo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -605,19 +625,21 @@ public class User extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new User().setVisible(true);
+                new Promo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton adminRole;
+    private javax.swing.JButton cariBtn;
     private javax.swing.JButton clearBtn;
     private javax.swing.JButton editBtn;
-    private javax.swing.JTextField emailField;
     private javax.swing.JButton hapusBtn;
+    private javax.swing.JPasswordField hargaPromoField;
     private javax.swing.JButton homeBtn;
     private javax.swing.JTextField idField;
+    private javax.swing.JTextField idMobilField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -633,8 +655,7 @@ public class User extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JRadioButton memberRole;
     private javax.swing.JButton mobilBtn;
-    private javax.swing.JTextField namaField;
-    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JTextField namaPromoField;
     private javax.swing.JButton paymentBtn;
     private javax.swing.JButton promoBtn;
     private javax.swing.ButtonGroup roleGroup;

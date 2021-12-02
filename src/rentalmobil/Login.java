@@ -49,6 +49,7 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login -Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -232,7 +233,7 @@ public class Login extends javax.swing.JFrame {
                         new Home().setVisible(true);
                     } else {
                         this.setVisible(false);
-                        new Profile_().setVisible(true);
+                        new Profile().setVisible(true);
                     }
                 }
             } else {
