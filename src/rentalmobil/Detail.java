@@ -218,6 +218,8 @@ public class Detail extends javax.swing.JFrame {
         jTextPane1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed et eget. Imperdiet mi, euismod ac lacus platea nec\n, vitae scelerisque. Lectus fringilla nam enim pellentesque massa.Lorem ipsum dolor sit amet\n, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla. Cras elementum adipiscing diam \nsed et eget. Imperdiet mi, euismod ac lacus platea nec, vitae scelerisque. Lectus fringilla nam \n");
         jScrollPane2.setViewportView(jTextPane1);
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 53.png"))); // NOI18N
+
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 15_1.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -226,7 +228,8 @@ public class Detail extends javax.swing.JFrame {
         jTextPane2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed ");
         jScrollPane3.setViewportView(jTextPane2);
 
-        jButton8.setText("jButton8");
+        jButton8.setBackground(new java.awt.Color(76, 196, 255));
+        jButton8.setText("Detail");
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 53.png"))); // NOI18N
 
@@ -236,14 +239,16 @@ public class Detail extends javax.swing.JFrame {
         jTextPane3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed ");
         jScrollPane4.setViewportView(jTextPane3);
 
-        jButton10.setText("jButton10");
+        jButton10.setBackground(new java.awt.Color(76, 196, 255));
+        jButton10.setText("Detail");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
 
-        jButton9.setText("jButton9");
+        jButton9.setBackground(new java.awt.Color(76, 196, 255));
+        jButton9.setText("Rental");
 
         jLabel9.setText("Harga Mobil");
 
