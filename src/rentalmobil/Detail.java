@@ -218,9 +218,7 @@ public class Detail extends javax.swing.JFrame {
         jTextPane1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla.\n Cras elementum adipiscing diam sed et eget. Imperdiet mi, euismod ac lacus platea nec\n, vitae scelerisque. Lectus fringilla nam enim pellentesque massa.Lorem ipsum dolor sit amet\n, consectetur adipiscing elit. Tincidunt amet pulvinar mi nulla. Cras elementum adipiscing diam \nsed et eget. Imperdiet mi, euismod ac lacus platea nec, vitae scelerisque. Lectus fringilla nam \n");
         jScrollPane2.setViewportView(jTextPane1);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivanka\\Documents\\Semester 1\\workshop pengembangan perangkat lunak\\New folder\\Rectangle 53.png")); // NOI18N
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivanka\\Documents\\Semester 1\\workshop pengembangan perangkat lunak\\New folder\\Rectangle 15.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 15.png"))); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setText("Nama Mobil");
@@ -230,7 +228,7 @@ public class Detail extends javax.swing.JFrame {
 
         jButton8.setText("jButton8");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ivanka\\Documents\\Semester 1\\workshop pengembangan perangkat lunak\\New folder\\Rectangle 53.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Rectangle 53.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setText("Nama Mobil");
@@ -276,13 +274,10 @@ public class Detail extends javax.swing.JFrame {
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6))))))
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)))))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
