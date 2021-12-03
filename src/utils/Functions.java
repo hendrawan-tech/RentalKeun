@@ -36,7 +36,7 @@ public class Functions {
         try {
             Class.forName(DRIVER);
             Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Database Connection");
+            System.out.println("Database Connected");
             return true;
         } catch (Exception e) {
             Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, e);

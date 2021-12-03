@@ -354,7 +354,11 @@
                                   </Group>
                               </Group>
                           </Group>
+<<<<<<< HEAD
                           <EmptySpace min="0" pref="1575" max="32767" attributes="0"/>
+=======
+                          <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
+>>>>>>> candi
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -396,7 +400,11 @@
                                   <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+<<<<<<< HEAD
                           <EmptySpace pref="2355" max="32767" attributes="0"/>
+=======
+                          <EmptySpace pref="205" max="32767" attributes="0"/>
+>>>>>>> candi
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -434,7 +442,11 @@
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+<<<<<<< HEAD
                       <Image iconType="3" name="/ICON/Rectangle 15_1.png"/>
+=======
+                      <Image iconType="3" name="/ICON/Toyota GR supra_1.png"/>
+>>>>>>> candi
                     </Property>
                   </Properties>
                 </Component>

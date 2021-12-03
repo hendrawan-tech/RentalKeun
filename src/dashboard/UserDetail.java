@@ -4,7 +4,10 @@
  */
 package dashboard;
 
+import java.awt.Button;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Panel;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.Connection;
@@ -33,43 +36,16 @@ public class UserDetail extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        loadTable();
-        idField.disable();
-    }
-
-    private void loadTable() {
-        DefaultTableModel model = new DefaultTableModel();
-
-        model.addColumn("No");
-        model.addColumn("ID");
-        model.addColumn("Nama");
-        model.addColumn("Email");
-        model.addColumn("Password");
-        model.addColumn("Role");
-
-        int no = 1;
-        String sql = "SELECT * FROM users";
-        try {
-            Connection conn = (Connection) Functions.configDB();
-            Statement stm = conn.createStatement();
-            ResultSet res = stm.executeQuery(sql);
-            while (res.next()) {
-                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(7)});
-            }
-            jTable1.setModel(model);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDetail.class.getName()).log(Level.SEVERE, null, ex);
+        
+        panelLoop.setLayout(new GridLayout(5, 1));
+        
+        for (int i = 1; i <= 5; i++) {
+            panelLoop.add(new Button("" + i));
         }
-
+        
     }
 
-    private void clear() {
-        emailField.setText(null);
-        passwordField.setText(null);
-        namaField.setText(null);
-        idField.setText(null);
-        adminRole.setSelected(true);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,24 +68,8 @@ public class UserDetail extends javax.swing.JFrame {
         transaksiBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        namaField = new javax.swing.JTextField();
-        tambahBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        hapusBtn = new javax.swing.JButton();
-        clearBtn = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        adminRole = new javax.swing.JRadioButton();
-        memberRole = new javax.swing.JRadioButton();
-        passwordField = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        idField = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        panelLoop = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User - Rentalkeun Dashboard");
@@ -250,93 +210,18 @@ public class UserDetail extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        jLabel1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Menu User");
+        javax.swing.GroupLayout panelLoopLayout = new javax.swing.GroupLayout(panelLoop);
+        panelLoop.setLayout(panelLoopLayout);
+        panelLoopLayout.setHorizontalGroup(
+            panelLoopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+        panelLoopLayout.setVerticalGroup(
+            panelLoopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 727, Short.MAX_VALUE)
+        );
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Email");
-
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Password");
-
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Nama");
-
-        tambahBtn.setBackground(new java.awt.Color(0, 255, 71));
-        tambahBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        tambahBtn.setForeground(new java.awt.Color(255, 255, 255));
-        tambahBtn.setText("Tambah");
-        tambahBtn.setBorderPainted(false);
-        tambahBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tambahBtnActionPerformed(evt);
-            }
-        });
-
-        editBtn.setBackground(new java.awt.Color(0, 178, 255));
-        editBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editBtn.setText("Edit");
-        editBtn.setBorderPainted(false);
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        hapusBtn.setBackground(new java.awt.Color(255, 0, 29));
-        hapusBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        hapusBtn.setForeground(new java.awt.Color(255, 255, 255));
-        hapusBtn.setText("Hapus");
-        hapusBtn.setBorderPainted(false);
-        hapusBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hapusBtnActionPerformed(evt);
-            }
-        });
-
-        clearBtn.setBackground(new java.awt.Color(0, 178, 255));
-        clearBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        clearBtn.setForeground(new java.awt.Color(255, 255, 255));
-        clearBtn.setText("Clear");
-        clearBtn.setBorderPainted(false);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Role");
-
-        roleGroup.add(adminRole);
-        adminRole.setSelected(true);
-        adminRole.setText("Admin");
-
-        roleGroup.add(memberRole);
-        memberRole.setText("Member");
-
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Id");
+        jScrollPane2.setViewportView(panelLoop);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -344,85 +229,16 @@ public class UserDetail extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(tambahBtn)
-                                        .addGap(42, 42, 42)
-                                        .addComponent(hapusBtn)
-                                        .addGap(42, 42, 42)
-                                        .addComponent(editBtn)
-                                        .addGap(42, 42, 42)
-                                        .addComponent(clearBtn))
-                                    .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(idField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(adminRole)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(memberRole)))))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(159, 159, 159)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(adminRole)
-                            .addComponent(memberRole)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tambahBtn)
-                    .addComponent(hapusBtn)
-                    .addComponent(editBtn)
-                    .addComponent(clearBtn))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -460,109 +276,6 @@ public class UserDetail extends javax.swing.JFrame {
             Logger.getLogger(UserDetail.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_homeBtnActionPerformed
-
-    private void tambahBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBtnActionPerformed
-        // TODO add your handling code here:
-        String role = null;
-        if (adminRole.isSelected()) {
-            role = "Admin";
-        } else if (memberRole.isSelected()) {
-            role = "Member";
-        }
-        try {
-            if (emailField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Email Mobil Tidak Boleh Kosong!");
-            } else if (passwordField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Password Sewa Tidak Boleh Kosong!");
-            } else if (namaField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Nama Tidak Boleh Kosong!");
-            } else if (!adminRole.isSelected() || !memberRole.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Anda Harus Memilih Role!");
-            } else {
-                String query = "INSERT INTO users (nama, email, password, role) VALUES "
-                        + "('" + namaField.getText() + "', '" + emailField.getText() + "', '"
-                        + passwordField.getText() + "', '" + role + "')";
-                Connection conn = (Connection) Functions.configDB();
-                PreparedStatement pst = conn.prepareStatement(query);
-                pst.execute();
-                JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
-                clear();
-                loadTable();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }//GEN-LAST:event_tambahBtnActionPerformed
-
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
-        String role = null;
-        if (adminRole.isSelected()) {
-            role = "Admin";
-        } else if (memberRole.isSelected()) {
-            role = "Member";
-        }
-        try {
-            String query = "UPDATE users SET nama='" + namaField.getText() + "', "
-                    + "email='" + emailField.getText() + "', password='" + passwordField.getText() + "', "
-                    + "role='" + role + "' WHERE id_user=" + idField.getText();
-            Connection conn = (Connection) Functions.configDB();
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Data berhasil diupdate!");
-            loadTable();
-            clear();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }//GEN-LAST:event_editBtnActionPerformed
-
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
-        // TODO add your handling code here:
-        clear();
-    }//GEN-LAST:event_clearBtnActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-        int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id = jTable1.getValueAt(baris, 1).toString();
-        idField.setText(id);
-        if (jTable1.getValueAt(baris, 2) == null) {
-            namaField.setText("");
-        } else {
-            namaField.setText(jTable1.getValueAt(baris, 2).toString());
-        }
-        if (jTable1.getValueAt(baris, 3) == null) {
-            emailField.setText("");
-        } else {
-            emailField.setText(jTable1.getValueAt(baris, 3).toString());
-        }
-        if (jTable1.getValueAt(baris, 4) == null) {
-            passwordField.setText("");
-        } else {
-            passwordField.setText(jTable1.getValueAt(baris, 4).toString());
-        }
-        if (jTable1.getValueAt(baris, 5).equals("Admin")) {
-            adminRole.setSelected(true);
-        } else if (jTable1.getValueAt(baris, 5).equals("Member")) {
-            memberRole.setSelected(true);
-        }
-    }//GEN-LAST:event_jTable1MouseClicked
-
-    private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
-        // TODO add your handling code here:
-        try {
-            String query = "DELETE FROM users WHERE id_user=" + idField.getText();
-            Connection conn = (Connection) Functions.configDB();
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
-            clear();
-            loadTable();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }//GEN-LAST:event_hapusBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -615,34 +328,18 @@ public class UserDetail extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton adminRole;
-    private javax.swing.JButton clearBtn;
-    private javax.swing.JButton editBtn;
-    private javax.swing.JTextField emailField;
-    private javax.swing.JButton hapusBtn;
     private javax.swing.JButton homeBtn;
-    private javax.swing.JTextField idField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JRadioButton memberRole;
     private javax.swing.JButton mobilBtn;
-    private javax.swing.JTextField namaField;
-    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JPanel panelLoop;
     private javax.swing.JButton paymentBtn;
     private javax.swing.JButton promoBtn;
     private javax.swing.ButtonGroup roleGroup;
-    private javax.swing.JButton tambahBtn;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JButton userBtn;
     // End of variables declaration//GEN-END:variables

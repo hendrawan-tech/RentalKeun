@@ -39,7 +39,6 @@ public class Mobil extends javax.swing.JFrame {
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         loadTable();
         idField.disable();
-        System.out.println(gambarField.getText().length());
     }
 
     private void loadTable() {
@@ -277,6 +276,12 @@ public class Mobil extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nama Mobil");
 
+        namaMobilField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                namaMobilFieldActionPerformed(evt);
+            }
+        });
+
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Harga Sewa");
 
@@ -381,49 +386,44 @@ public class Mobil extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tambahBtn)
-                                .addGap(42, 42, 42)
-                                .addComponent(hapusBtn)
-                                .addGap(42, 42, 42)
-                                .addComponent(editBtn)
-                                .addGap(42, 42, 42)
-                                .addComponent(clearBtn))
-                            .addComponent(jLabel11)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2)
+                        .addComponent(tambahBtn)
+                        .addGap(42, 42, 42)
+                        .addComponent(hapusBtn)
+                        .addGap(42, 42, 42)
+                        .addComponent(editBtn)
+                        .addGap(42, 42, 42)
+                        .addComponent(clearBtn))
+                    .addComponent(jLabel11)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(namaMobilField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                    .addComponent(hargaSewaField)
+                                    .addComponent(noPolisiField)))
+                            .addGap(89, 89, 89)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel9)
-                                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel6)
-                                            .addComponent(namaMobilField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                            .addComponent(hargaSewaField)
-                                            .addComponent(noPolisiField)))
-                                    .addGap(89, 89, 89)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(19, 19, 19)
-                                            .addComponent(pilihBtn))))))
-                        .addContainerGap(66, Short.MAX_VALUE))))
+                                    .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(19, 19, 19)
+                                    .addComponent(pilihBtn))))))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -599,7 +599,7 @@ public class Mobil extends javax.swing.JFrame {
             String format_tanggal = "yyyyMMddhhmmss";
             SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
             String tanggal = String.valueOf(df.format(tanggal_update));
-            destinationFile = new File(newpath + "/mobil-" + tanggal.toString() + "." + extension);
+            destinationFile = new File(newpath + "/mobil-" + tanggal + "." + extension);
             String destFile = destinationFile.toString();
             String[] iconPath = destFile.split("src");
             gambarField.setText(iconPath[1]);
@@ -673,6 +673,10 @@ public class Mobil extends javax.swing.JFrame {
         this.setVisible(false);
         new User().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void namaMobilFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMobilFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_namaMobilFieldActionPerformed
 
     /**
      * @param args the command line arguments
