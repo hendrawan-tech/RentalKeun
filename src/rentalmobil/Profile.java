@@ -4,14 +4,22 @@
  */
 package rentalmobil;
 
+import java.sql.Statement;
 import dashboard.*;
-import utils.Functions;
+import java.awt.Image;
+import java.io.File;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import utils.Functions;
 import javax.swing.JOptionPane;
 
@@ -23,7 +31,9 @@ public class Profile extends javax.swing.JFrame {
 
     /**
      * Creates new form Payment
+     * @throws java.sql.SQLException
      */
+    
     public Profile() throws SQLException {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
@@ -32,6 +42,37 @@ public class Profile extends javax.swing.JFrame {
             initComponents();
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+            getData(Functions.get_email());
+        }
+    }
+
+    private void getData(String email) throws SQLException {
+        try {
+            String query = "SELECT * FROM users u, user_meta um WHERE u.id_user = um.user_id AND u.email='" + email + "'";
+            Connection conn = (Connection) Functions.configDB();
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(query);
+            if (res.next()) {
+                String createdAt = res.getString("created_at");
+                String[] splitedCreatedAt = createdAt.split(" ");
+                namaField.setText(res.getString("nama"));
+                emailField.setText(res.getString("email"));
+                bergabungField.setText(splitedCreatedAt[0]);
+                noTeleponField.setText(res.getString("no_telepon"));
+                alamatField.setText(res.getString("alamat"));
+                ktpField.setText(res.getString("foto_ktp"));
+                Image icon = new ImageIcon(this.getClass().getResource(ktpField.getText())).getImage();
+                Image image = icon.getScaledInstance(previewKTP.getWidth(), previewKTP.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon ic = new ImageIcon(image);
+                previewKTP.setIcon(ic);
+                simField.setText(res.getString("foto_sim"));
+                Image icon2 = new ImageIcon(this.getClass().getResource(simField.getText())).getImage();
+                Image image2 = icon2.getScaledInstance(previewSIM.getWidth(), previewSIM.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon ic2 = new ImageIcon(image2);
+                previewSIM.setIcon(ic2);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error : " + e);
         }
     }
 
@@ -58,28 +99,27 @@ public class Profile extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        namaField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        bergabungField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        noTeleponField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
+        ktpField = new javax.swing.JTextField();
+        pilihKTPBtn = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        simField = new javax.swing.JTextField();
+        pilihSIMBtn = new javax.swing.JButton();
+        simpanDataDiriBtn = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        alamatField = new javax.swing.JTextArea();
+        previewKTP = new javax.swing.JLabel();
+        previewSIM = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Profile - Rentalkeun Dashboard");
@@ -98,6 +138,11 @@ public class Profile extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setIconTextGap(10);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(76, 196, 255));
         jButton2.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -206,21 +251,20 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel4.setText("Nama");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        namaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                namaFieldActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Email");
 
-        jLabel7.setText("Alamat");
-
         jLabel8.setText("Bergabung sejak");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        bergabungField.setEditable(false);
+        bergabungField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                bergabungFieldActionPerformed(evt);
             }
         });
 
@@ -231,37 +275,49 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel11.setText("Alamat");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
         jLabel12.setText("Foto KTP");
 
-        jButton9.setBackground(new java.awt.Color(76, 196, 255));
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("Pilih");
+        pilihKTPBtn.setBackground(new java.awt.Color(76, 196, 255));
+        pilihKTPBtn.setForeground(new java.awt.Color(255, 255, 255));
+        pilihKTPBtn.setText("Pilih");
+        pilihKTPBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pilihKTPBtnActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Foto SIM");
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        pilihSIMBtn.setBackground(new java.awt.Color(76, 196, 255));
+        pilihSIMBtn.setForeground(new java.awt.Color(255, 255, 255));
+        pilihSIMBtn.setText("Pilih");
+        pilihSIMBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                pilihSIMBtnActionPerformed(evt);
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(76, 196, 255));
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Pilih");
-
-        jButton11.setBackground(new java.awt.Color(76, 196, 255));
-        jButton11.setForeground(new java.awt.Color(255, 255, 255));
-        jButton11.setText("Simpan");
+        simpanDataDiriBtn.setBackground(new java.awt.Color(76, 196, 255));
+        simpanDataDiriBtn.setForeground(new java.awt.Color(255, 255, 255));
+        simpanDataDiriBtn.setText("Simpan");
+        simpanDataDiriBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanDataDiriBtnActionPerformed(evt);
+            }
+        });
 
         jButton12.setBackground(new java.awt.Color(76, 196, 255));
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
         jButton12.setText("Simpan");
+
+        alamatField.setColumns(20);
+        alamatField.setLineWrap(true);
+        alamatField.setRows(5);
+        jScrollPane2.setViewportView(alamatField);
+
+        previewKTP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        previewSIM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -271,38 +327,34 @@ public class Profile extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(200, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(namaField)
+                            .addComponent(jLabel5)
+                            .addComponent(emailField)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(simField, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pilihSIMBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel8)
+                            .addComponent(bergabungField)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10)
+                            .addComponent(noTeleponField)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(ktpField)
+                                .addGap(18, 18, 18)
+                                .addComponent(pilihKTPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2)
+                            .addComponent(previewKTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(previewSIM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(simpanDataDiriBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(260, 260, 260)
+                        .addGap(266, 266, 266)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(329, 329, 329)
@@ -319,50 +371,46 @@ public class Profile extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
+                .addComponent(bergabungField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton12)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(noTeleponField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(previewKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ktpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pilihKTPBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(previewSIM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(136, 136, 136))
+                    .addComponent(simField)
+                    .addComponent(pilihSIMBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(simpanDataDiriBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(55, 55, 55))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -411,21 +459,130 @@ public class Profile extends javax.swing.JFrame {
         new Info().setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void namaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_namaFieldActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void bergabungFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bergabungFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_bergabungFieldActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void pilihKTPBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihKTPBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+        String filename;
+        try {
+            if (ktpField.getText().length() > 3) {
+                File dstFile = new File("src" + ktpField.getText());
+                Files.delete(dstFile.toPath());
+            }
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File file = chooser.getSelectedFile();
+            Image icon = ImageIO.read(file);
+            Image image = icon.getScaledInstance(previewKTP.getWidth(), previewKTP.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon ic = new ImageIcon(image);
+            previewKTP.setIcon(ic);
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+            filename = file.getAbsolutePath();
+
+            String newpath = "src/ktp/";
+            File directory = new File(newpath);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            File sourceFile = null;
+            File destinationFile = null;
+
+            String extension = filename.substring(filename.lastIndexOf('.') + 1);
+            sourceFile = new File(filename);
+            Date tanggal_update = new Date();
+            String format_tanggal = "yyyyMMddhhmmss";
+            SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
+            String tanggal = String.valueOf(df.format(tanggal_update));
+            destinationFile = new File(newpath + "/ktp-" + tanggal + "." + extension);
+            String destFile = destinationFile.toString();
+            String[] iconPath = destFile.split("src");
+            ktpField.setText(iconPath[1]);
+            Files.copy(sourceFile.toPath(), destinationFile.toPath());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
+        }
+    }//GEN-LAST:event_pilihKTPBtnActionPerformed
+
+    private void pilihSIMBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihSIMBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+        String filename;
+        try {
+            if (simField.getText().length() > 3) {
+                File dstFile = new File("src" + simField.getText());
+                Files.delete(dstFile.toPath());
+            }
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File file = chooser.getSelectedFile();
+            Image icon = ImageIO.read(file);
+            Image image = icon.getScaledInstance(previewSIM.getWidth(), previewSIM.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon ic = new ImageIcon(image);
+            previewSIM.setIcon(ic);
+
+            filename = file.getAbsolutePath();
+
+            String newpath = "src/sim/";
+            File directory = new File(newpath);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            File sourceFile = null;
+            File destinationFile = null;
+
+            String extension = filename.substring(filename.lastIndexOf('.') + 1);
+            sourceFile = new File(filename);
+            Date tanggal_update = new Date();
+            String format_tanggal = "yyyyMMddhhmmss";
+            SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
+            String tanggal = String.valueOf(df.format(tanggal_update));
+            destinationFile = new File(newpath + "/sim-" + tanggal + "." + extension);
+            String destFile = destinationFile.toString();
+            String[] iconPath = destFile.split("src");
+            simField.setText(iconPath[1]);
+            Files.copy(sourceFile.toPath(), destinationFile.toPath());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
+        }
+    }//GEN-LAST:event_pilihSIMBtnActionPerformed
+
+    private void simpanDataDiriBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanDataDiriBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            Connection conn = (Connection) Functions.configDB();
+            String query = "SELECT * FROM users WHERE email='" + Functions.get_email() + "'";
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(query);
+            if (res.next()) {
+                String query2 = "INSERT INTO user_meta (user_id, no_telepon, foto_ktp, foto_sim, alamat) VALUES ('" + res.getString("id_user") + "', '" + noTeleponField.getText() + "', '"
+                        + ktpField.getText() + "', '" + simField.getText() + "', '" + alamatField.getText() + "')";
+                PreparedStatement pst = conn.prepareStatement(query2);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Data Diri Berhasil Disimpan!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error : " + e);
+        }
+    }//GEN-LAST:event_simpanDataDiriBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Beranda().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,15 +639,15 @@ public class Profile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea alamatField;
+    private javax.swing.JTextField bergabungField;
+    private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -501,22 +658,21 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField ktpField;
+    private javax.swing.JTextField namaField;
+    private javax.swing.JTextField noTeleponField;
+    private javax.swing.JButton pilihKTPBtn;
+    private javax.swing.JButton pilihSIMBtn;
+    private javax.swing.JLabel previewKTP;
+    private javax.swing.JLabel previewSIM;
+    private javax.swing.JTextField simField;
+    private javax.swing.JButton simpanDataDiriBtn;
     // End of variables declaration//GEN-END:variables
 }

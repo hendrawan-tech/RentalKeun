@@ -6,7 +6,6 @@
 package rentalmobil;
 
 import dashboard.Home;
-import java.sql.Connection;
 import javax.swing.JOptionPane;
 import utils.Functions;
 

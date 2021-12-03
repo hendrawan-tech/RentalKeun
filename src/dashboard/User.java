@@ -481,14 +481,6 @@ public class User extends javax.swing.JFrame {
                         + passwordField.getText() + "', '" + role + "')";
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
-                String query2 = "SELECT * FROM users";
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query2);
-                while (rs.next()) {
-                    String query3 = "INSERT INTO user_meta (user_id) VALUES ('" + rs.getString(1) + "')";
-                    PreparedStatement pst2 = conn.prepareStatement(query3);
-                    pst2.execute();
-                }
                 JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
                 clear();
                 loadTable();
