@@ -25,6 +25,7 @@ public class Functions {
     private static final String URL = "jdbc:mysql://db4free.net:3306/" + DB_NAME;
     
     private static String email;
+    private  static  String id_mobil;
 
     public static Connection configDB() throws SQLException {
         DriverManager.registerDriver(new Driver());
@@ -49,11 +50,19 @@ public class Functions {
         isConnected();
     }
     
+    public static String get_id_mobil() {
+        return id_mobil;
+    }
+    
     public static String get_email() {
         return email;
     }
     
     public static void set_email(String data) {
         email = data;
+    }
+    
+    public static void set_id_mobil(String data) {
+        id_mobil = data;
     }
 }

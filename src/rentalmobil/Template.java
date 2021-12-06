@@ -8,7 +8,7 @@ import dashboard.*;
 import java.awt.Image;
 import utils.Functions;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,53 +21,20 @@ import rentalmobil.Login;
  *
  * @author tohsaka
  */
-public class Beranda extends javax.swing.JFrame {
-
+public class Template extends javax.swing.JFrame {
+    
     public static String idMobil;
-    public static String idMobil2;
 
     /**
      * Creates new form Payment
      */
-    public Beranda() throws SQLException {
+    
+    public Template() {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
             System.exit(0);
         } else {
             initComponents();
-            this.setLocationRelativeTo(null);
-            this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-            this.setResizable(false);
-            getDataCar();
-        }
-    }
-
-    public void getDataCar() throws SQLException {
-        try {
-            String query = "SELECT * FROM mobil";
-            Connection conn = (Connection) Functions.configDB();
-            PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet res = pst.executeQuery();
-            res.last();
-//            Mobil 1
-            Image icon = new ImageIcon(this.getClass().getResource(res.getString("gambar"))).getImage();
-            Image image = icon.getScaledInstance(imgMobil.getWidth(), imgMobil.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ic = new ImageIcon(image);
-            imgMobil.setIcon(ic);
-            namaMobil.setText(res.getString("nama_mobil"));
-            descField.setText("<html>" + res.getString("deskripsi") + "</html>");
-            idMobil = res.getString("id_mobil");
-            
-            res.previous();
-            Image icon2 = new ImageIcon(this.getClass().getResource(res.getString("gambar"))).getImage();
-            Image image2 = icon2.getScaledInstance(imgMobil.getWidth(), imgMobil.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ic2 = new ImageIcon(image2);
-            imgMobil2.setIcon(ic2);
-            namaMobil2.setText(res.getString("nama_mobil"));
-            descField2.setText("<html>" + res.getString("deskripsi") + "</html>");
-            idMobil2 = res.getString("id_mobil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error : " + e);
         }
     }
 
@@ -91,22 +58,6 @@ public class Beranda extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        bannerPromo = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jPanel5 = new javax.swing.JPanel();
-        namaMobil2 = new javax.swing.JLabel();
-        imgMobil2 = new javax.swing.JLabel();
-        descField2 = new javax.swing.JLabel();
-        pilihBtn2 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        namaMobil = new javax.swing.JLabel();
-        imgMobil = new javax.swing.JLabel();
-        pilihBtn = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home- Rentalkeun Dashboard");
@@ -165,6 +116,7 @@ public class Beranda extends javax.swing.JFrame {
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        logoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_exit.png"))); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.setBorderPainted(false);
@@ -233,154 +185,15 @@ public class Beranda extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel6.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Promo Saat Ini");
-
-        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
-
-        bannerPromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/banner_promo (1).png"))); // NOI18N
-        bannerPromo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        bannerPromo.setPreferredSize(new java.awt.Dimension(411, 200));
-
-        jLabel5.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Mobil Terbaru");
-
-        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
-
-        jPanel5.setBackground(new java.awt.Color(204, 255, 255));
-
-        namaMobil2.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        namaMobil2.setForeground(new java.awt.Color(51, 51, 51));
-        namaMobil2.setText("label");
-
-        descField2.setForeground(new java.awt.Color(51, 51, 51));
-
-        pilihBtn2.setBackground(new java.awt.Color(0, 178, 255));
-        pilihBtn2.setForeground(new java.awt.Color(255, 255, 255));
-        pilihBtn2.setText("Pilih");
-        pilihBtn2.setBorderPainted(false);
-        pilihBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pilihBtn2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(imgMobil2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(pilihBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(namaMobil2)
-                    .addComponent(descField2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 20, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imgMobil2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(namaMobil2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(descField2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pilihBtn2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(204, 255, 255));
-
-        namaMobil.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        namaMobil.setForeground(new java.awt.Color(51, 51, 51));
-        namaMobil.setText("label");
-
-        pilihBtn.setBackground(new java.awt.Color(0, 178, 255));
-        pilihBtn.setForeground(new java.awt.Color(255, 255, 255));
-        pilihBtn.setText("Pilih");
-        pilihBtn.setBorderPainted(false);
-        pilihBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pilihBtnActionPerformed(evt);
-            }
-        });
-
-        jScrollPane2.setViewportView(jTextPane1);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(imgMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(namaMobil)
-                    .addComponent(jScrollPane2))
-                .addGap(20, 20, 20))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(namaMobil)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)
-                        .addGap(18, 18, 18)
-                        .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imgMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(bannerPromo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2))
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addGap(0, 717, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bannerPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addGap(0, 805, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -392,7 +205,7 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,23 +252,9 @@ public class Beranda extends javax.swing.JFrame {
         try {
             new Profile().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Template.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_profileBtnActionPerformed
-
-    private void pilihBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        try {
-            new Detail(idMobil).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_pilihBtnActionPerformed
-
-    private void pilihBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pilihBtn2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,84 +273,34 @@ public class Beranda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Template.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Template.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Template.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Template.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Beranda().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Template().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bannerPromo;
     private javax.swing.JButton berandaBtn;
-    private javax.swing.JLabel descField2;
-    private javax.swing.JLabel imgMobil;
-    private javax.swing.JLabel imgMobil2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JLabel namaMobil;
-    private javax.swing.JLabel namaMobil2;
-    private javax.swing.JButton pilihBtn;
-    private javax.swing.JButton pilihBtn2;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton promoBtn;
     private javax.swing.JButton transaksiBtn;

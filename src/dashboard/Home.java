@@ -128,6 +128,11 @@ public class Home extends javax.swing.JFrame {
         paymentBtn.setBorderPainted(false);
         paymentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         paymentBtn.setIconTextGap(10);
+        paymentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymentBtnActionPerformed(evt);
+            }
+        });
 
         promoBtn.setBackground(new java.awt.Color(76, 196, 255));
         promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -137,6 +142,11 @@ public class Home extends javax.swing.JFrame {
         promoBtn.setBorderPainted(false);
         promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         promoBtn.setIconTextGap(10);
+        promoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                promoBtnActionPerformed(evt);
+            }
+        });
 
         userBtn.setBackground(new java.awt.Color(76, 196, 255));
         userBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -355,6 +365,18 @@ public class Home extends javax.swing.JFrame {
        this.setVisible(false);
        new User().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void paymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Payment().setVisible(true);
+    }//GEN-LAST:event_paymentBtnActionPerformed
+
+    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Promo().setVisible(true);
+    }//GEN-LAST:event_promoBtnActionPerformed
 
     /**
      * @param args the command line arguments

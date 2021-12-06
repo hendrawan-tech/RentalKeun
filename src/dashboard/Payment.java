@@ -4,21 +4,13 @@
  */
 package dashboard;
 
-import java.awt.Image;
-import java.io.File;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import utils.Functions;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,15 +20,16 @@ import rentalmobil.Login;
  *
  * @author tohsaka
  */
-public class Mobil extends javax.swing.JFrame {
+public class Payment extends javax.swing.JFrame {
 
     /**
      * Creates new form Payment
      */
-    public Mobil() {
+    public Payment() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         loadTable();
         idField.disable();
     }
@@ -46,37 +39,30 @@ public class Mobil extends javax.swing.JFrame {
 
         model.addColumn("No");
         model.addColumn("ID");
-        model.addColumn("Nama Mobil");
-        model.addColumn("Harga Sewa");
-        model.addColumn("No Polisi");
-        model.addColumn("Gambar");
-        model.addColumn("Merk");
-        model.addColumn("Deskripsi");
+        model.addColumn("Nama");
+        model.addColumn("No. Rekening");
+        model.addColumn("Bank");
 
         int no = 1;
-        String sql = "SELECT * FROM mobil";
+        String sql = "SELECT * FROM payments";
         try {
             Connection conn = (Connection) Functions.configDB();
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3), 
-                    res.getString(4), res.getString(5), res.getString(6), res.getString(7)});
+                model.addRow(new Object[]{no++, res.getString("id_payment"), res.getString("nama"), res.getString("no_rekening"), res.getString("nama_bank")});
             }
             jTable1.setModel(model);
         } catch (SQLException ex) {
-            Logger.getLogger(Mobil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Payment.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
     private void clear() {
-        namaMobilField.setText(null);
-        hargaSewaField.setText(null);
-        noPolisiField.setText(null);
-        gambarField.setText(null);
-        merkField.setText(null);
-        previewGambar.setIcon(null);
+        namaField.setText(null);
+        noRekField.setText(null);
+        namaBankField.setText(null);
         idField.setText(null);
     }
 
@@ -89,6 +75,7 @@ public class Mobil extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        roleGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -102,32 +89,22 @@ public class Mobil extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        namaMobilField = new javax.swing.JTextField();
+        namaField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        noPolisiField = new javax.swing.JTextField();
-        hargaSewaField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        gambarField = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        merkField = new javax.swing.JTextField();
+        namaBankField = new javax.swing.JTextField();
         tambahBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         hapusBtn = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        idField = new javax.swing.JTextField();
         clearBtn = new javax.swing.JButton();
-        pilihBtn = new javax.swing.JButton();
-        previewGambar = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        deskripsiField = new javax.swing.JTextArea();
-        jLabel11 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        idField = new javax.swing.JTextField();
+        noRekField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Mobil - Rentalkeun Dashboard");
+        setTitle("User - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -158,6 +135,11 @@ public class Mobil extends javax.swing.JFrame {
         mobilBtn.setBorderPainted(false);
         mobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         mobilBtn.setIconTextGap(10);
+        mobilBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mobilBtnActionPerformed(evt);
+            }
+        });
 
         paymentBtn.setBackground(new java.awt.Color(76, 196, 255));
         paymentBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -167,11 +149,6 @@ public class Mobil extends javax.swing.JFrame {
         paymentBtn.setBorderPainted(false);
         paymentBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         paymentBtn.setIconTextGap(10);
-        paymentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paymentBtnActionPerformed(evt);
-            }
-        });
 
         promoBtn.setBackground(new java.awt.Color(76, 196, 255));
         promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -246,7 +223,7 @@ public class Mobil extends javax.swing.JFrame {
                             .addComponent(userBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel2)))
@@ -281,29 +258,17 @@ public class Mobil extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Menu Mobil");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Payment User");
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Nama Mobil");
-
-        namaMobilField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaMobilFieldActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("Nama");
 
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Harga Sewa");
-
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("No. Polisi ");
+        jLabel5.setText("No. Rekening");
 
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Gambar");
-
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel8.setText("Merk");
+        jLabel7.setText("Nama Bank");
 
         tambahBtn.setBackground(new java.awt.Color(0, 255, 71));
         tambahBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -356,9 +321,6 @@ public class Mobil extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Id");
-
         clearBtn.setBackground(new java.awt.Color(0, 178, 255));
         clearBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         clearBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -370,26 +332,8 @@ public class Mobil extends javax.swing.JFrame {
             }
         });
 
-        pilihBtn.setBackground(new java.awt.Color(0, 178, 255));
-        pilihBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        pilihBtn.setForeground(new java.awt.Color(255, 255, 255));
-        pilihBtn.setText("Pilih");
-        pilihBtn.setBorderPainted(false);
-        pilihBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pilihBtnActionPerformed(evt);
-            }
-        });
-
-        previewGambar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        deskripsiField.setColumns(20);
-        deskripsiField.setLineWrap(true);
-        deskripsiField.setRows(5);
-        jScrollPane2.setViewportView(deskripsiField);
-
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel11.setText("Deskripsi");
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Id");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -397,44 +341,37 @@ public class Mobil extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tambahBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(hapusBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(editBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(clearBtn))
-                    .addComponent(jLabel11)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9)
-                                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6)
-                                .addComponent(namaMobilField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                                .addComponent(hargaSewaField)
-                                .addComponent(noPolisiField)))
-                        .addGap(89, 89, 89)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(pilihBtn))))
-                    .addComponent(jSeparator1))
-                .addContainerGap(100, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(namaField, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                    .addComponent(noRekField))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(namaBankField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tambahBtn)
+                                .addGap(42, 42, 42)
+                                .addComponent(hapusBtn)
+                                .addGap(42, 42, 42)
+                                .addComponent(editBtn)
+                                .addGap(42, 42, 42)
+                                .addComponent(clearBtn)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(76, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,52 +379,33 @@ public class Mobil extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(namaMobilField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(hargaSewaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noPolisiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(merkField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(previewGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pilihBtn))))
+                        .addComponent(namaBankField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noRekField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahBtn)
                     .addComponent(hapusBtn)
                     .addComponent(editBtn)
                     .addComponent(clearBtn))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -521,31 +439,24 @@ public class Mobil extends javax.swing.JFrame {
         try {
             new Home().setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(Mobil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Payment.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_homeBtnActionPerformed
 
     private void tambahBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahBtnActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
         try {
-            if (namaMobilField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Nama Mobil Tidak Boleh Kosong!");
-            } else if (hargaSewaField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Harga Sewa Tidak Boleh Kosong!");
-            } else if (noPolisiField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field No Polisi Tidak Boleh Kosong!");
-            } else if (gambarField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Gambar Tidak Boleh Kosong!");
-            } else if (merkField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Field Merk Tidak Boleh Kosong!");
-            } else if (deskripsiField.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Text Area Deskripsi Tidak Boleh Kosong!");
+            if (namaField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Text Field Email Mobil Tidak Boleh Kosong!");
+            } else if (noRekField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Text Field Password Sewa Tidak Boleh Kosong!");
+            } else if (namaBankField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Text Field Nama Tidak Boleh Kosong!");
             } else {
-                String query = "INSERT INTO mobil (nama_mobil, harga_sewa, no_polisi, gambar, merk, deskripsi) VALUES "
-                        + "('" + namaMobilField.getText() + "', " + hargaSewaField.getText() + ", '"
-                        + noPolisiField.getText() + "', '" + gambarField.getText() + "', '" + merkField.getText() + "', "
-                        + "'" + deskripsiField.getText() + "')";
                 Connection conn = (Connection) Functions.configDB();
+                String query = "INSERT INTO payments (nama, no_rekening, nama_bank) VALUES "
+                        + "('" + namaField.getText() + "', '" + noRekField.getText() + "', '"
+                        + namaBankField.getText() + "')";
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
@@ -560,9 +471,9 @@ public class Mobil extends javax.swing.JFrame {
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         // TODO add your handling code here:
         try {
-            String query = "UPDATE mobil SET nama_mobil='" + namaMobilField.getText() + "', "
-                    + "harga_sewa=" + hargaSewaField.getText() + ", no_polisi='" + noPolisiField.getText() + "', "
-                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "', '" + deskripsiField.getText() + "' WHERE id_mobil=" + idField.getText();
+            String query = "UPDATE payments SET nama='" + namaField.getText() + "', "
+                    + "no_rekening='" + noRekField.getText() + "', nama_bank='" + namaBankField.getText()
+                    + "' WHERE id_user=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
@@ -579,100 +490,35 @@ public class Mobil extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_clearBtnActionPerformed
 
-    private void pilihBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pilihBtnActionPerformed
-        // TODO add your handling code here:
-        String filename;
-        try {
-            if (gambarField.getText().length() > 3) {
-                File dstFile = new File("src" + gambarField.getText());
-                Files.delete(dstFile.toPath());
-            }
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File file = chooser.getSelectedFile();
-            Image icon = ImageIO.read(file);
-            Image image = icon.getScaledInstance(previewGambar.getWidth(), previewGambar.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ic = new ImageIcon(image);
-            previewGambar.setIcon(ic);
-
-            filename = file.getAbsolutePath();
-
-            String newpath = "src/mobil/";
-            File directory = new File(newpath);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-
-            File sourceFile = null;
-            File destinationFile = null;
-
-            String extension = filename.substring(filename.lastIndexOf('.') + 1);
-            sourceFile = new File(filename);
-            Date tanggal_update = new Date();
-            String format_tanggal = "yyyyMMddhhmmss";
-            SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
-            String tanggal = String.valueOf(df.format(tanggal_update));
-            destinationFile = new File(newpath + "/mobil-" + tanggal + "." + extension);
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            gambarField.setText(iconPath[1]);
-            Files.copy(sourceFile.toPath(), destinationFile.toPath());
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
-        }
-    }//GEN-LAST:event_pilihBtnActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int baris = jTable1.rowAtPoint(evt.getPoint());
         String id = jTable1.getValueAt(baris, 1).toString();
         idField.setText(id);
         if (jTable1.getValueAt(baris, 2) == null) {
-            namaMobilField.setText("");
+            namaField.setText("");
         } else {
-            namaMobilField.setText(jTable1.getValueAt(baris, 2).toString());
+            namaField.setText(jTable1.getValueAt(baris, 2).toString());
         }
         if (jTable1.getValueAt(baris, 3) == null) {
-            hargaSewaField.setText("");
+            namaBankField.setText("");
         } else {
-            hargaSewaField.setText(jTable1.getValueAt(baris, 3).toString());
+            namaBankField.setText(jTable1.getValueAt(baris, 3).toString());
         }
         if (jTable1.getValueAt(baris, 4) == null) {
-            noPolisiField.setText("");
+            noRekField.setText("");
         } else {
-            noPolisiField.setText(jTable1.getValueAt(baris, 4).toString());
-        }
-        if (jTable1.getValueAt(baris, 5) == null) {
-            gambarField.setText("");
-        } else {
-            gambarField.setText(jTable1.getValueAt(baris, 5).toString());
-            Image icon = new ImageIcon(this.getClass().getResource(gambarField.getText())).getImage();
-            Image image = icon.getScaledInstance(previewGambar.getWidth(), previewGambar.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ic = new ImageIcon(image);
-            previewGambar.setIcon(ic);
-        }
-        if (jTable1.getValueAt(baris, 6) == null) {
-            merkField.setText("");
-        } else {
-            merkField.setText(jTable1.getValueAt(baris, 6).toString());
-        }
-        if (jTable1.getValueAt(baris, 7) == null) {
-            deskripsiField.setText("");
-        } else {
-            deskripsiField.setText(jTable1.getValueAt(baris, 7).toString());
+            noRekField.setText(jTable1.getValueAt(baris, 4).toString());
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
         // TODO add your handling code here:
         try {
-            String query = "DELETE FROM mobil WHERE id_mobil=" + idField.getText();
-            File dstFile = new File("src" + gambarField.getText());
+            String query = "DELETE FROM users WHERE id_user=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
-            Files.delete(dstFile.toPath());
             JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
             clear();
             loadTable();
@@ -681,27 +527,23 @@ public class Mobil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hapusBtnActionPerformed
 
-    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
+    private void mobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new User().setVisible(true);
-    }//GEN-LAST:event_userBtnActionPerformed
-
-    private void namaMobilFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaMobilFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_namaMobilFieldActionPerformed
-
-    private void paymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Payment().setVisible(true);
-    }//GEN-LAST:event_paymentBtnActionPerformed
+        new Mobil().setVisible(true);
+    }//GEN-LAST:event_mobilBtnActionPerformed
 
     private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new Promo().setVisible(true);
     }//GEN-LAST:event_promoBtnActionPerformed
+
+    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Promo().setVisible(true);
+    }//GEN-LAST:event_userBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -720,14 +562,26 @@ public class Mobil extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -736,45 +590,36 @@ public class Mobil extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Mobil().setVisible(true);
+                new Payment().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearBtn;
-    private javax.swing.JTextArea deskripsiField;
     private javax.swing.JButton editBtn;
-    private javax.swing.JTextField gambarField;
     private javax.swing.JButton hapusBtn;
-    private javax.swing.JTextField hargaSewaField;
     private javax.swing.JButton homeBtn;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
-    private javax.swing.JTextField merkField;
     private javax.swing.JButton mobilBtn;
-    private javax.swing.JTextField namaMobilField;
-    private javax.swing.JTextField noPolisiField;
+    private javax.swing.JTextField namaBankField;
+    private javax.swing.JTextField namaField;
+    private javax.swing.JTextField noRekField;
     private javax.swing.JButton paymentBtn;
-    private javax.swing.JButton pilihBtn;
-    private javax.swing.JLabel previewGambar;
     private javax.swing.JButton promoBtn;
+    private javax.swing.ButtonGroup roleGroup;
     private javax.swing.JButton tambahBtn;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JButton userBtn;
