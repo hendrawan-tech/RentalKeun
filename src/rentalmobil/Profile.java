@@ -88,12 +88,13 @@ public class Profile extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        berandaBtn = new javax.swing.JButton();
+        promoBtn = new javax.swing.JButton();
+        transaksiBtn = new javax.swing.JButton();
+        profileBtn = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        listMobilBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -130,51 +131,51 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_logo.png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(76, 196, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_home.png"))); // NOI18N
-        jButton1.setText("Beranda");
-        jButton1.setBorderPainted(false);
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton1.setIconTextGap(10);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        berandaBtn.setBackground(new java.awt.Color(76, 196, 255));
+        berandaBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        berandaBtn.setForeground(new java.awt.Color(255, 255, 255));
+        berandaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_home.png"))); // NOI18N
+        berandaBtn.setText("Beranda");
+        berandaBtn.setBorderPainted(false);
+        berandaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        berandaBtn.setIconTextGap(10);
+        berandaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                berandaBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(76, 196, 255));
-        jButton2.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        jButton2.setText("Promo");
-        jButton2.setBorderPainted(false);
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton2.setIconTextGap(10);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
+        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
+        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
+        promoBtn.setText("Promo");
+        promoBtn.setBorderPainted(false);
+        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        promoBtn.setIconTextGap(10);
+        promoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                promoBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(76, 196, 255));
-        jButton3.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_payment.png"))); // NOI18N
-        jButton3.setText("Transaksi");
-        jButton3.setBorderPainted(false);
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton3.setIconTextGap(10);
+        transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
+        transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
+        transaksiBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_payment.png"))); // NOI18N
+        transaksiBtn.setText("Transaksi");
+        transaksiBtn.setBorderPainted(false);
+        transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        transaksiBtn.setIconTextGap(10);
 
-        jButton4.setBackground(new java.awt.Color(76, 196, 255));
-        jButton4.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_user.png"))); // NOI18N
-        jButton4.setText("Profil");
-        jButton4.setBorderPainted(false);
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jButton4.setIconTextGap(10);
+        profileBtn.setBackground(new java.awt.Color(76, 196, 255));
+        profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        profileBtn.setForeground(new java.awt.Color(255, 255, 255));
+        profileBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_user.png"))); // NOI18N
+        profileBtn.setText("Profile");
+        profileBtn.setBorderPainted(false);
+        profileBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        profileBtn.setIconTextGap(10);
 
         jButton7.setBackground(new java.awt.Color(255, 255, 255));
         jButton7.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -196,6 +197,20 @@ public class Profile extends javax.swing.JFrame {
             }
         });
 
+        listMobilBtn.setBackground(new java.awt.Color(76, 196, 255));
+        listMobilBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        listMobilBtn.setForeground(new java.awt.Color(255, 255, 255));
+        listMobilBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_car.png"))); // NOI18N
+        listMobilBtn.setText("List Mobil");
+        listMobilBtn.setBorderPainted(false);
+        listMobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listMobilBtn.setIconTextGap(10);
+        listMobilBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listMobilBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -208,11 +223,12 @@ public class Profile extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(listMobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -227,14 +243,16 @@ public class Profile extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(33, 33, 33)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(profileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -448,11 +466,11 @@ public class Profile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new ListMobil().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_promoBtnActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
@@ -574,7 +592,7 @@ public class Profile extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_simpanDataDiriBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void berandaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_berandaBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         try {
@@ -582,7 +600,13 @@ public class Profile extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_berandaBtnActionPerformed
+
+    private void listMobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMobilBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListMobil().setVisible(true);
+    }//GEN-LAST:event_listMobilBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -640,13 +664,10 @@ public class Profile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea alamatField;
+    private javax.swing.JButton berandaBtn;
     private javax.swing.JTextField bergabungField;
     private javax.swing.JTextField emailField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -666,13 +687,17 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField ktpField;
+    private javax.swing.JButton listMobilBtn;
     private javax.swing.JTextField namaField;
     private javax.swing.JTextField noTeleponField;
     private javax.swing.JButton pilihKTPBtn;
     private javax.swing.JButton pilihSIMBtn;
     private javax.swing.JLabel previewKTP;
     private javax.swing.JLabel previewSIM;
+    private javax.swing.JButton profileBtn;
+    private javax.swing.JButton promoBtn;
     private javax.swing.JTextField simField;
     private javax.swing.JButton simpanDataDiriBtn;
+    private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }

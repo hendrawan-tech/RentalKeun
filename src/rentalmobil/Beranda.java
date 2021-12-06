@@ -89,6 +89,7 @@ public class Beranda extends javax.swing.JFrame {
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        listMobilBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -105,8 +106,8 @@ public class Beranda extends javax.swing.JFrame {
         namaMobil = new javax.swing.JLabel();
         imgMobil = new javax.swing.JLabel();
         pilihBtn = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        descField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home- Rentalkeun Dashboard");
@@ -184,6 +185,20 @@ public class Beranda extends javax.swing.JFrame {
             }
         });
 
+        listMobilBtn.setBackground(new java.awt.Color(76, 196, 255));
+        listMobilBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        listMobilBtn.setForeground(new java.awt.Color(255, 255, 255));
+        listMobilBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_car.png"))); // NOI18N
+        listMobilBtn.setText("List Mobil");
+        listMobilBtn.setBorderPainted(false);
+        listMobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listMobilBtn.setIconTextGap(10);
+        listMobilBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listMobilBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -200,7 +215,8 @@ public class Beranda extends javax.swing.JFrame {
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(listMobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -216,6 +232,8 @@ public class Beranda extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(33, 33, 33)
                 .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -315,7 +333,12 @@ public class Beranda extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane2.setViewportView(jTextPane1);
+        descField.setEditable(false);
+        descField.setColumns(20);
+        descField.setLineWrap(true);
+        descField.setRows(5);
+        descField.setText("\n");
+        jScrollPane3.setViewportView(descField);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -330,7 +353,7 @@ public class Beranda extends javax.swing.JFrame {
                         .addGap(188, 188, 188)
                         .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(namaMobil)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane3))
                 .addGap(20, 20, 20))
         );
         jPanel4Layout.setVerticalGroup(
@@ -341,8 +364,8 @@ public class Beranda extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(namaMobil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(imgMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -458,6 +481,12 @@ public class Beranda extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pilihBtn2ActionPerformed
 
+    private void listMobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMobilBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListMobil().setVisible(true);
+    }//GEN-LAST:event_listMobilBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -531,6 +560,7 @@ public class Beranda extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bannerPromo;
     private javax.swing.JButton berandaBtn;
+    private javax.swing.JTextArea descField;
     private javax.swing.JLabel descField2;
     private javax.swing.JLabel imgMobil;
     private javax.swing.JLabel imgMobil2;
@@ -544,10 +574,10 @@ public class Beranda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JButton listMobilBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel namaMobil;
     private javax.swing.JLabel namaMobil2;
