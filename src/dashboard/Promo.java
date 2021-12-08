@@ -332,10 +332,15 @@ public class Promo extends javax.swing.JFrame {
 
         roleGroup.add(adminRole);
         adminRole.setSelected(true);
-        adminRole.setText("Admin");
+        adminRole.setText("Active");
+        adminRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminRoleActionPerformed(evt);
+            }
+        });
 
         roleGroup.add(memberRole);
-        memberRole.setText("Member");
+        memberRole.setText("Expired");
 
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Id Promo");
@@ -579,6 +584,10 @@ public class Promo extends javax.swing.JFrame {
         this.setVisible(false);
         new User().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void adminRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adminRoleActionPerformed
 
     /**
      * @param args the command line arguments

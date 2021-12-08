@@ -8,30 +8,67 @@ import dashboard.*;
 import java.awt.Image;
 import utils.Functions;
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author tohsaka
  */
 public class ListMobil extends javax.swing.JFrame {
+    
+    public static String idMobil;
 
     /**
      * Creates new form Payment
      */
-    
     public ListMobil() {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
             System.exit(0);
         } else {
-            initComponents();
-            this.setResizable(false);
-            this.setLocationRelativeTo(null);
+        initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
 //            this.setTitle(idMobil);
+        getData();
+        }
+    }
+
+    public void getData() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No");
+        model.addColumn("ID");
+        model.addColumn("Nama Mobil");
+        model.addColumn("Gambar");
+
+        int no = 1;
+        String query = "SELECT * FROM mobil";
+
+        try {
+            Connection conn = (Connection) Functions.configDB();
+            PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                model.addRow(new Object[]{no++, res.getString("id_mobil"), res.getString("nama_mobil"), res.getString("gambar")});
+            }
+            res.first();
+            jTable1.setModel(model);
+            namaMobil.setText(res.getString("nama_mobil"));
+            path.setText(res.getString("gambar"));
+            Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
+            Image image = icon.getScaledInstance(previewMobil.getWidth(), previewMobil.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon ic = new ImageIcon(image);
+            previewMobil.setIcon(ic);
+            idMobil = res.getString("id_mobil");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error : " + e);
         }
     }
 
@@ -62,6 +99,7 @@ public class ListMobil extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        path = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home- Rentalkeun Dashboard");
@@ -184,7 +222,6 @@ public class ListMobil extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -200,6 +237,11 @@ public class ListMobil extends javax.swing.JFrame {
         detailBtn.setForeground(new java.awt.Color(255, 255, 255));
         detailBtn.setText("Selengkapnya");
         detailBtn.setBorderPainted(false);
+        detailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                detailBtnActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,39 +265,46 @@ public class ListMobil extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setText("List Mobil");
 
+        path.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        path.setForeground(new java.awt.Color(255, 255, 255));
+        path.setText("Path");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(namaMobil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(path)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(detailBtn))
-                    .addComponent(previewMobil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                    .addComponent(jSeparator1))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(previewMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(previewMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(previewMobil, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(namaMobil)
-                    .addComponent(detailBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                    .addComponent(detailBtn)
+                    .addComponent(path))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -267,7 +316,7 @@ public class ListMobil extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,32 +370,32 @@ public class ListMobil extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int baris = jTable1.rowAtPoint(evt.getPoint());
-        String id = jTable1.getValueAt(baris, 1).toString();
-        idField.setText(id);
+        idMobil = jTable1.getValueAt(baris, 1).toString();
         if (jTable1.getValueAt(baris, 2) == null) {
-            namaMobilField.setText("");
+            namaMobil.setText("");
         } else {
-            namaMobilField.setText(jTable1.getValueAt(baris, 2).toString());
+            namaMobil.setText(jTable1.getValueAt(baris, 2).toString());
         }
         if (jTable1.getValueAt(baris, 3) == null) {
-            hargaSewaField.setText("");
+            previewMobil.setIcon(null);
         } else {
-            hargaSewaField.setText(jTable1.getValueAt(baris, 3).toString());
-        }
-        if (jTable1.getValueAt(baris, 4) == null) {
-            noPolisiField.setText("");
-        } else {
-            noPolisiField.setText(jTable1.getValueAt(baris, 4).toString());
-        }
-        if (jTable1.getValueAt(baris, 5) == null) {
-            gambarField.setText("");
-        } else {
-            Image icon = new ImageIcon(this.getClass().getResource(gambarField.getText())).getImage();
-            Image image = icon.getScaledInstance(previewGambar.getWidth(), previewGambar.getHeight(), Image.SCALE_SMOOTH);
+            path.setText(jTable1.getValueAt(baris, 3).toString());
+            Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
+            Image image = icon.getScaledInstance(648, 315, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
-            previewGambar.setIcon(ic);
+            previewMobil.setIcon(ic);
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void detailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Detail(idMobil).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_detailBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,6 +454,7 @@ public class ListMobil extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel namaMobil;
+    private javax.swing.JLabel path;
     private javax.swing.JLabel previewMobil;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton promoBtn;

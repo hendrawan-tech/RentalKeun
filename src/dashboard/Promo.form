@@ -546,15 +546,18 @@
               <ComponentRef name="roleGroup"/>
             </Property>
             <Property name="selected" type="boolean" value="true"/>
-            <Property name="text" type="java.lang.String" value="Admin"/>
+            <Property name="text" type="java.lang.String" value="Active"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminRoleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="memberRole">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="roleGroup"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Member"/>
+            <Property name="text" type="java.lang.String" value="Expired"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="hargaPromoField">

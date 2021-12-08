@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -30,12 +32,13 @@ public class Template extends javax.swing.JFrame {
      */
     
     public Template() {
-        if (Functions.get_email() == null) {
-            JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
-            System.exit(0);
-        } else {
+//        if (Functions.get_email() == null) {
+//            JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
+//            System.exit(0);
+//        } else {
             initComponents();
-        }
+            System.out.println();
+//        }
     }
 
     /**
@@ -56,8 +59,11 @@ public class Template extends javax.swing.JFrame {
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        listMobilBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        tombol = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Home- Rentalkeun Dashboard");
@@ -135,6 +141,15 @@ public class Template extends javax.swing.JFrame {
             }
         });
 
+        listMobilBtn.setBackground(new java.awt.Color(76, 196, 255));
+        listMobilBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        listMobilBtn.setForeground(new java.awt.Color(255, 255, 255));
+        listMobilBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_car.png"))); // NOI18N
+        listMobilBtn.setText("List Mobil");
+        listMobilBtn.setBorderPainted(false);
+        listMobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listMobilBtn.setIconTextGap(10);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -151,7 +166,8 @@ public class Template extends javax.swing.JFrame {
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(listMobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -168,6 +184,8 @@ public class Template extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,15 +203,34 @@ public class Template extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        dateChooser.setDateFormatString("dd-MM-yyyy");
+
+        tombol.setText("Tampilkan");
+        tombol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tombolActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 717, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(255, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tombol)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(253, 253, 253))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 805, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tombol)
+                .addContainerGap(557, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -256,6 +293,14 @@ public class Template extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_profileBtnActionPerformed
 
+    private void tombolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tombolActionPerformed
+        // TODO add your handling code here:
+//        String date = dateChooser.getDate().set
+        SimpleDateFormat dateFor = new SimpleDateFormat("yyyy-MM-dd");
+        String stringDate = dateFor.format(dateChooser.getDate());
+        JOptionPane.showMessageDialog(null, stringDate);
+    }//GEN-LAST:event_tombolActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,15 +339,18 @@ public class Template extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton berandaBtn;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton listMobilBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton promoBtn;
+    private javax.swing.JButton tombol;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }
