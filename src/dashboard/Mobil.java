@@ -4,6 +4,8 @@
  */
 package dashboard;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.nio.file.Files;
@@ -37,11 +39,19 @@ public class Mobil extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         loadTable();
         idField.disable();
     }
 
     private void loadTable() {
+        jTable1.getTableHeader().setFont(new Font("SF Pro Display", Font.BOLD, 12));
+        jTable1.getTableHeader().setBackground(new Color(0, 178, 255));
+        jTable1.getTableHeader().setForeground(new Color(0, 0, 0));
+        jTable1.getTableHeader().setOpaque(false);
+        jTable1.setRowHeight(25);
+        
+        
         DefaultTableModel model = new DefaultTableModel();
 
         model.addColumn("No");
@@ -338,6 +348,12 @@ public class Mobil extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setFocusable(false);
+        jTable1.setRowHeight(25);
+        jTable1.setSelectionBackground(new java.awt.Color(0, 178, 255));
+        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTable1.setShowHorizontalLines(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -591,7 +607,7 @@ public class Mobil extends javax.swing.JFrame {
             chooser.showOpenDialog(null);
             File file = chooser.getSelectedFile();
             Image icon = ImageIO.read(file);
-            Image image = icon.getScaledInstance(previewGambar.getWidth(), previewGambar.getHeight(), Image.SCALE_SMOOTH);
+            Image image = icon.getScaledInstance(345, 222, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
             previewGambar.setIcon(ic);
 
@@ -648,7 +664,7 @@ public class Mobil extends javax.swing.JFrame {
         } else {
             gambarField.setText(jTable1.getValueAt(baris, 5).toString());
             Image icon = new ImageIcon(this.getClass().getResource(gambarField.getText())).getImage();
-            Image image = icon.getScaledInstance(previewGambar.getWidth(), previewGambar.getHeight(), Image.SCALE_SMOOTH);
+            Image image = icon.getScaledInstance(345, 222, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
             previewGambar.setIcon(ic);
         }
