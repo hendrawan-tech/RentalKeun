@@ -8,6 +8,7 @@ import java.sql.Statement;
 import dashboard.*;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,12 +29,15 @@ import javax.swing.JOptionPane;
  * @author tohsaka
  */
 public class Profile extends javax.swing.JFrame {
+    
+    public static File pathGambarKtp;
+    public static File pathGambarSim;
 
     /**
      * Creates new form Payment
+     *
      * @throws java.sql.SQLException
      */
-    
     public Profile() throws SQLException {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
@@ -42,13 +46,14 @@ public class Profile extends javax.swing.JFrame {
             initComponents();
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-            getData(Functions.get_email());
+            getDataUser(Functions.get_email());
+            getUserMeta(Functions.get_email());
         }
     }
 
-    private void getData(String email) throws SQLException {
+    private void getDataUser(String email) throws SQLException {
         try {
-            String query = "SELECT * FROM users u, user_meta um WHERE u.id_user = um.user_id AND u.email='" + email + "'";
+            String query = "SELECT * FROM users WHERE email ='" + email + "'";
             Connection conn = (Connection) Functions.configDB();
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
@@ -58,6 +63,19 @@ public class Profile extends javax.swing.JFrame {
                 namaField.setText(res.getString("nama"));
                 emailField.setText(res.getString("email"));
                 bergabungField.setText(splitedCreatedAt[0]);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "error : " + e);
+        }
+    }
+
+    private void getUserMeta(String email) {
+        try {
+            String query = "SELECT * FROM users u, user_meta um WHERE u.id_user = um.user_id AND u.email = '" + email + "'";
+            Connection conn = (Connection) Functions.configDB();
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(query);
+            if (res.next()) {
                 noTeleponField.setText(res.getString("no_telepon"));
                 alamatField.setText(res.getString("alamat"));
                 ktpField.setText(res.getString("foto_ktp"));
@@ -71,7 +89,7 @@ public class Profile extends javax.swing.JFrame {
                 ImageIcon ic2 = new ImageIcon(image2);
                 previewSIM.setIcon(ic2);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error : " + e);
         }
     }
@@ -121,9 +139,13 @@ public class Profile extends javax.swing.JFrame {
         alamatField = new javax.swing.JTextArea();
         previewKTP = new javax.swing.JLabel();
         previewSIM = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        hapusKtpBtn = new javax.swing.JButton();
+        hapusSimBtn = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Profile - Rentalkeun Dashboard");
+        setTitle("Profile - Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,6 +189,11 @@ public class Profile extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         profileBtn.setBackground(new java.awt.Color(76, 196, 255));
         profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -262,7 +289,8 @@ public class Profile extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Profile");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_default_profile_pic.png"))); // NOI18N
@@ -286,7 +314,8 @@ public class Profile extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("SF Pro Display", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Data Pribadi");
 
         jLabel10.setText("No telpon");
@@ -296,8 +325,10 @@ public class Profile extends javax.swing.JFrame {
         jLabel12.setText("Foto KTP");
 
         pilihKTPBtn.setBackground(new java.awt.Color(76, 196, 255));
+        pilihKTPBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         pilihKTPBtn.setForeground(new java.awt.Color(255, 255, 255));
         pilihKTPBtn.setText("Pilih");
+        pilihKTPBtn.setBorderPainted(false);
         pilihKTPBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihKTPBtnActionPerformed(evt);
@@ -307,8 +338,10 @@ public class Profile extends javax.swing.JFrame {
         jLabel13.setText("Foto SIM");
 
         pilihSIMBtn.setBackground(new java.awt.Color(76, 196, 255));
+        pilihSIMBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         pilihSIMBtn.setForeground(new java.awt.Color(255, 255, 255));
         pilihSIMBtn.setText("Pilih");
+        pilihSIMBtn.setBorderPainted(false);
         pilihSIMBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pilihSIMBtnActionPerformed(evt);
@@ -316,8 +349,10 @@ public class Profile extends javax.swing.JFrame {
         });
 
         simpanDataDiriBtn.setBackground(new java.awt.Color(76, 196, 255));
+        simpanDataDiriBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         simpanDataDiriBtn.setForeground(new java.awt.Color(255, 255, 255));
-        simpanDataDiriBtn.setText("Simpan");
+        simpanDataDiriBtn.setText("Simpan Data Diri");
+        simpanDataDiriBtn.setBorderPainted(false);
         simpanDataDiriBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 simpanDataDiriBtnActionPerformed(evt);
@@ -325,66 +360,108 @@ public class Profile extends javax.swing.JFrame {
         });
 
         jButton12.setBackground(new java.awt.Color(76, 196, 255));
+        jButton12.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         jButton12.setForeground(new java.awt.Color(255, 255, 255));
         jButton12.setText("Simpan");
+        jButton12.setBorderPainted(false);
 
         alamatField.setColumns(20);
         alamatField.setLineWrap(true);
         alamatField.setRows(5);
         jScrollPane2.setViewportView(alamatField);
 
-        previewKTP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        previewKTP.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
-        previewSIM.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        previewSIM.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+
+        hapusKtpBtn.setBackground(new java.awt.Color(76, 196, 255));
+        hapusKtpBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        hapusKtpBtn.setForeground(new java.awt.Color(255, 255, 255));
+        hapusKtpBtn.setText("Hapus");
+        hapusKtpBtn.setBorderPainted(false);
+        hapusKtpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusKtpBtnActionPerformed(evt);
+            }
+        });
+
+        hapusSimBtn.setBackground(new java.awt.Color(76, 196, 255));
+        hapusSimBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        hapusSimBtn.setForeground(new java.awt.Color(255, 255, 255));
+        hapusSimBtn.setText("Hapus");
+        hapusSimBtn.setBorderPainted(false);
+        hapusSimBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusSimBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(266, 266, 266)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(previewKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(previewSIM, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel13)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(simField)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(pilihSIMBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(hapusSimBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(simpanDataDiriBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addGap(218, 218, 218))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(ktpField)
+                                    .addGap(112, 112, 112))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(pilihKTPBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(hapusKtpBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(111, 111, 111)))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(200, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(namaField)
-                            .addComponent(jLabel5)
-                            .addComponent(emailField)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(simField, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pilihSIMBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                            .addComponent(jLabel13)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(bergabungField)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(bergabungField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(namaField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(noTeleponField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
-                            .addComponent(noTeleponField)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(ktpField)
-                                .addGap(18, 18, 18)
-                                .addComponent(pilihKTPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2)
-                            .addComponent(previewKTP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(previewSIM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(simpanDataDiriBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(329, 329, 329)
-                        .addComponent(jLabel6)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                            .addComponent(jLabel11))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel4)
@@ -402,7 +479,9 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(jButton12)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(noTeleponField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -410,25 +489,33 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(previewKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ktpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pilihKTPBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(previewSIM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(simField)
-                    .addComponent(pilihSIMBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(simpanDataDiriBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(55, 55, 55))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(previewKTP, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ktpField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pilihKTPBtn)
+                            .addComponent(hapusKtpBtn))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(previewSIM, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(simField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(hapusSimBtn)
+                            .addComponent(pilihSIMBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addComponent(simpanDataDiriBtn)
+                        .addGap(125, 125, 125))))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -497,7 +584,7 @@ public class Profile extends javax.swing.JFrame {
             chooser.showOpenDialog(null);
             File file = chooser.getSelectedFile();
             Image icon = ImageIO.read(file);
-            Image image = icon.getScaledInstance(previewKTP.getWidth(), previewKTP.getHeight(), Image.SCALE_SMOOTH);
+            Image image = icon.getScaledInstance(329, 200, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
             previewKTP.setIcon(ic);
 
@@ -519,6 +606,7 @@ public class Profile extends javax.swing.JFrame {
             SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/ktp-" + tanggal + "." + extension);
+            pathGambarKtp = destinationFile;
             String destFile = destinationFile.toString();
             String[] iconPath = destFile.split("src");
             ktpField.setText(iconPath[1]);
@@ -541,7 +629,7 @@ public class Profile extends javax.swing.JFrame {
             chooser.showOpenDialog(null);
             File file = chooser.getSelectedFile();
             Image icon = ImageIO.read(file);
-            Image image = icon.getScaledInstance(previewSIM.getWidth(), previewSIM.getHeight(), Image.SCALE_SMOOTH);
+            Image image = icon.getScaledInstance(329, 200, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
             previewSIM.setIcon(ic);
 
@@ -563,6 +651,7 @@ public class Profile extends javax.swing.JFrame {
             SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/sim-" + tanggal + "." + extension);
+            pathGambarSim = destinationFile;
             String destFile = destinationFile.toString();
             String[] iconPath = destFile.split("src");
             simField.setText(iconPath[1]);
@@ -586,6 +675,8 @@ public class Profile extends javax.swing.JFrame {
                 PreparedStatement pst = conn.prepareStatement(query2);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Diri Berhasil Disimpan!");
+                getDataUser(Functions.get_email());
+                getUserMeta(Functions.get_email());
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error : " + e);
@@ -607,6 +698,48 @@ public class Profile extends javax.swing.JFrame {
         this.setVisible(false);
         new ListMobil().setVisible(true);
     }//GEN-LAST:event_listMobilBtnActionPerformed
+
+    private void hapusKtpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusKtpBtnActionPerformed
+        // TODO add your handling code here:
+        if (pathGambarKtp == null) {
+            JOptionPane.showMessageDialog(null, "Anda belum memilih gambar!");
+        } else {
+            try {
+                Files.delete(pathGambarKtp.toPath());
+                ktpField.setText(null);
+                previewKTP.setIcon(null);
+                pathGambarKtp = null;
+            } catch (IOException ex) {
+                Logger.getLogger(Mobil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_hapusKtpBtnActionPerformed
+
+    private void hapusSimBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusSimBtnActionPerformed
+        // TODO add your handling code here:
+        if (pathGambarSim == null) {
+            JOptionPane.showMessageDialog(null, "Anda belum memilih gambar!");
+        } else {
+            try {
+                Files.delete(pathGambarSim.toPath());
+                simField.setText(null);
+                previewSIM.setIcon(null);
+                pathGambarSim = null;
+            } catch (IOException ex) {
+                Logger.getLogger(Mobil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_hapusSimBtnActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Transaksi().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -667,6 +800,8 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JButton berandaBtn;
     private javax.swing.JTextField bergabungField;
     private javax.swing.JTextField emailField;
+    private javax.swing.JButton hapusKtpBtn;
+    private javax.swing.JButton hapusSimBtn;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -686,6 +821,8 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField ktpField;
     private javax.swing.JButton listMobilBtn;
     private javax.swing.JTextField namaField;

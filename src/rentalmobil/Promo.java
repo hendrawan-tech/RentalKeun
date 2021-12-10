@@ -69,7 +69,7 @@ public class Promo extends javax.swing.JFrame {
         bannerPromo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Promo - Rentalkeun Dashboard");
+        setTitle("Promo - Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -85,6 +85,11 @@ public class Promo extends javax.swing.JFrame {
         berandaBtn.setBorderPainted(false);
         berandaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         berandaBtn.setIconTextGap(10);
+        berandaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                berandaBtnActionPerformed(evt);
+            }
+        });
 
         promoBtn.setBackground(new java.awt.Color(76, 196, 255));
         promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -94,11 +99,6 @@ public class Promo extends javax.swing.JFrame {
         promoBtn.setBorderPainted(false);
         promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
-            }
-        });
 
         transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
         transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -108,6 +108,11 @@ public class Promo extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         profileBtn.setBackground(new java.awt.Color(76, 196, 255));
         profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -152,6 +157,11 @@ public class Promo extends javax.swing.JFrame {
         listMobilBtn.setBorderPainted(false);
         listMobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         listMobilBtn.setIconTextGap(10);
+        listMobilBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listMobilBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -275,12 +285,6 @@ public class Promo extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Info().setVisible(true);
@@ -295,6 +299,28 @@ public class Promo extends javax.swing.JFrame {
             Logger.getLogger(Promo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_profileBtnActionPerformed
+
+    private void berandaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_berandaBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Promo().setVisible(true);
+    }//GEN-LAST:event_berandaBtnActionPerformed
+
+    private void listMobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listMobilBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListMobil().setVisible(true);
+    }//GEN-LAST:event_listMobilBtnActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Transaksi().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Promo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments

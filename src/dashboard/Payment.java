@@ -104,7 +104,7 @@ public class Payment extends javax.swing.JFrame {
         noRekField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("User - Rentalkeun Dashboard");
+        setTitle("Payment - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -473,7 +473,7 @@ public class Payment extends javax.swing.JFrame {
         try {
             String query = "UPDATE payments SET nama='" + namaField.getText() + "', "
                     + "no_rekening='" + noRekField.getText() + "', nama_bank='" + namaBankField.getText()
-                    + "' WHERE id_user=" + idField.getText();
+                    + "' WHERE id_payment=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
@@ -515,7 +515,7 @@ public class Payment extends javax.swing.JFrame {
     private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
         // TODO add your handling code here:
         try {
-            String query = "DELETE FROM users WHERE id_user=" + idField.getText();
+            String query = "DELETE FROM payments WHERE id_payment=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();

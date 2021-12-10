@@ -9,8 +9,14 @@ import java.awt.Image;
 import utils.Functions;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -23,12 +29,15 @@ import rentalmobil.Login;
  */
 public class Detail extends javax.swing.JFrame {
     
-    public static String idMobil;
+    public static String id_user = Functions.get_id_user();
+    public static String id_mobil;
+    public static String id_promo = null;
+    public static String id_payment = null;
+    public static int harga_sewa;
 
     /**
      * Creates new form Payment
      */
-    
     public Detail() {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
@@ -49,11 +58,12 @@ public class Detail extends javax.swing.JFrame {
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
-            getData(idMobil);
+            getDataMobil(idMobil);
+            getDataBank();
         }
     }
-
-    public void getData(String idMobil) throws SQLException {
+    
+    public void getDataMobil(String idMobil) throws SQLException {
         try {
             String query = "SELECT * FROM mobil WHERE id_mobil=" + idMobil;
             Connection conn = (Connection) Functions.configDB();
@@ -70,6 +80,24 @@ public class Detail extends javax.swing.JFrame {
                 platMobil.setText(res.getString("no_polisi"));
                 merkMobil.setText(res.getString("merk"));
                 deskripsi.setText(res.getString("deskripsi"));
+                // yyyy-MM-dd
+                
+                id_mobil = res.getString("id_mobil");
+                harga_sewa = Integer.parseInt(res.getString("harga_sewa"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error : " + e);
+        }
+    }
+    
+    public void getDataBank() {
+        try {
+            String query = "SELECT * FROM payments WHERE nama_bank='" + paymentComboBox.getSelectedItem().toString() + "'";
+            Connection conn = (Connection) Functions.configDB();
+            PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                id_payment = res.getString("id_payment");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error : " + e);
@@ -105,17 +133,17 @@ public class Detail extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         deskripsi = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        paymentComboBox = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        rentalBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         tanggalSewa = new com.toedter.calendar.JDateChooser();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        tanggalKembali = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Detail - Rentalkeun Dashboard");
+        setTitle("Detail - Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -282,17 +310,22 @@ public class Detail extends javax.swing.JFrame {
 
         jLabel1.setText("Tanggal Sewa");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        paymentComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BCA", "BNI" }));
 
         jLabel4.setText("Payment");
 
         jLabel5.setText("Tanggal Kembali");
 
-        jButton1.setBackground(new java.awt.Color(0, 178, 255));
-        jButton1.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Rental");
-        jButton1.setBorderPainted(false);
+        rentalBtn.setBackground(new java.awt.Color(0, 178, 255));
+        rentalBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        rentalBtn.setForeground(new java.awt.Color(255, 255, 255));
+        rentalBtn.setText("Rental");
+        rentalBtn.setBorderPainted(false);
+        rentalBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentalBtnActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
@@ -300,7 +333,7 @@ public class Detail extends javax.swing.JFrame {
 
         tanggalSewa.setDateFormatString("dd-MM-yyyy");
 
-        jDateChooser1.setDateFormatString("dd-MM-yyyy");
+        tanggalKembali.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -326,12 +359,12 @@ public class Detail extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tanggalKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rentalBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 108, Short.MAX_VALUE)))
+                            .addComponent(paymentComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 108, Short.MAX_VALUE)))
                     .addComponent(jSeparator1))
                 .addContainerGap(85, Short.MAX_VALUE))
         );
@@ -362,10 +395,10 @@ public class Detail extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(paymentComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tanggalKembali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rentalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tanggalSewa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
@@ -446,6 +479,53 @@ public class Detail extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_berandaBtnActionPerformed
 
+    private void rentalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalBtnActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat dateFor = new SimpleDateFormat("yyyy-MM-dd");
+        String tglSewa = dateFor.format(tanggalSewa.getDate());
+        String tglKembali = dateFor.format(tanggalKembali.getDate());
+        String[] tglSewaArr = dateFor.format(tanggalSewa.getDate()).split("-");
+        String[] tglKembaliArr = dateFor.format(tanggalKembali.getDate()).split("-");
+        
+        LocalDate fromDate = LocalDate.of(Integer.parseInt(tglSewaArr[0]), Integer.parseInt(tglSewaArr[1]), Integer.parseInt(tglSewaArr[2]));
+        LocalDate toDate = LocalDate.of(Integer.parseInt(tglKembaliArr[0]), Integer.parseInt(tglKembaliArr[1]), Integer.parseInt(tglKembaliArr[2]));
+        int days = (int) (ChronoUnit.DAYS.between(fromDate, toDate));
+        
+        int nilaiDp = (harga_sewa * (days + 1)) / 2;
+        int denda = 0;
+        int total = harga_sewa * (days + 1);
+        String dp = Integer.toString(nilaiDp);
+
+        // Generate angka random untuk id order
+        int min = 100000;
+        int max = 999999;
+        int random = (int) (Math.random() * (max - min + 1) + min);
+        String id_order = "OR" + Integer.toString(random);
+        try {
+            String query = "INSERT INTO orders (id_order, id_user, id_mobil, id_payment, tanggal_penyewaan, tanggal_pengembalian,"
+                    + "dp, total, status) VALUES ('" + id_order + "'," + id_user + "," + id_mobil + "," + id_payment + ","
+                    + "'" + tglSewa + "','" + tglKembali + "'," + dp + "," + total + ",'DP')";
+            String query2 = "SELECT * FROM user_meta um WHERE um.user_id = " + Functions.get_id_user();
+            Connection conn = (Connection) Functions.configDB();
+            PreparedStatement pst = conn.prepareStatement(query);
+            Statement st = conn.createStatement();
+            ResultSet res = st.executeQuery(query2);
+            if (res.next()) {
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Berhasil memilih mobil, silahkan untuk membayar uang DP nya ^-^, ");
+                this.setVisible(false);
+                new Transaksi().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Silahkan lengkapi data diri anda untuk melakukan transaksi!");
+                this.setVisible(false);
+                new Profile().setVisible(true);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error : " + e);
+        }
+    }//GEN-LAST:event_rentalBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -487,9 +567,6 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JTextArea deskripsi;
     private javax.swing.JLabel gambarMobil;
     private javax.swing.JLabel hargaMobil;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -506,9 +583,12 @@ public class Detail extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel merkMobil;
     private javax.swing.JLabel namaMobil;
+    private javax.swing.JComboBox<String> paymentComboBox;
     private javax.swing.JLabel platMobil;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton promoBtn;
+    private javax.swing.JButton rentalBtn;
+    private com.toedter.calendar.JDateChooser tanggalKembali;
     private com.toedter.calendar.JDateChooser tanggalSewa;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables

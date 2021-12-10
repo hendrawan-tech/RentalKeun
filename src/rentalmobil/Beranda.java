@@ -131,7 +131,7 @@ public final class Beranda extends javax.swing.JFrame {
         bannerPromo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Home- Rentalkeun Dashboard");
+        setTitle("Home- Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -170,6 +170,11 @@ public final class Beranda extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         profileBtn.setBackground(new java.awt.Color(76, 196, 255));
         profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -517,7 +522,7 @@ public final class Beranda extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         try {
-            new Detail(idMobil).setVisible(true);
+            new Detail(idMobil2).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -528,6 +533,16 @@ public final class Beranda extends javax.swing.JFrame {
         this.setVisible(false);
         new ListMobil().setVisible(true);
     }//GEN-LAST:event_listMobilBtnActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Transaksi().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Beranda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments
