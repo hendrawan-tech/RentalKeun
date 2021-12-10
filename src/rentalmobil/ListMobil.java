@@ -71,6 +71,19 @@ public class ListMobil extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error : " + e);
         }
     }
+    
+    public void getDataBank() throws SQLException {
+        String query = "SELECT * FROM payments";
+        Connection conn = (Connection)Functions.configDB();
+        try {
+            PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res = pst.executeQuery();
+//            if (res.next()) {
+//                
+//            }
+        } catch (Exception e) {
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,6 +103,7 @@ public class ListMobil extends javax.swing.JFrame {
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        listMobilBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         previewMobil = new javax.swing.JLabel();
@@ -102,7 +116,7 @@ public class ListMobil extends javax.swing.JFrame {
         path = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Home- Rentalkeun Dashboard");
+        setTitle("List Mobil - Rentalkeun");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -141,6 +155,11 @@ public class ListMobil extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         profileBtn.setBackground(new java.awt.Color(76, 196, 255));
         profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -177,6 +196,15 @@ public class ListMobil extends javax.swing.JFrame {
             }
         });
 
+        listMobilBtn.setBackground(new java.awt.Color(76, 196, 255));
+        listMobilBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        listMobilBtn.setForeground(new java.awt.Color(255, 255, 255));
+        listMobilBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_car.png"))); // NOI18N
+        listMobilBtn.setText("List Mobil");
+        listMobilBtn.setBorderPainted(false);
+        listMobilBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        listMobilBtn.setIconTextGap(10);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -193,7 +221,8 @@ public class ListMobil extends javax.swing.JFrame {
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(listMobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -209,6 +238,8 @@ public class ListMobil extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(33, 33, 33)
                 .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -397,6 +428,16 @@ public class ListMobil extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_detailBtnActionPerformed
 
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Transaksi().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListMobil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_transaksiBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -452,6 +493,7 @@ public class ListMobil extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton listMobilBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel namaMobil;
     private javax.swing.JLabel path;

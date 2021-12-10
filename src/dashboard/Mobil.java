@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,6 +32,8 @@ import rentalmobil.Login;
  * @author tohsaka
  */
 public class Mobil extends javax.swing.JFrame {
+    
+    public static File newImage;
 
     /**
      * Creates new form Payment
@@ -135,6 +138,7 @@ public class Mobil extends javax.swing.JFrame {
         deskripsiField = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        hapusGambarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mobil - Rentalkeun Dashboard");
@@ -397,7 +401,7 @@ public class Mobil extends javax.swing.JFrame {
             }
         });
 
-        previewGambar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        previewGambar.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         deskripsiField.setColumns(20);
         deskripsiField.setLineWrap(true);
@@ -406,6 +410,17 @@ public class Mobil extends javax.swing.JFrame {
 
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Deskripsi");
+
+        hapusGambarBtn.setBackground(new java.awt.Color(0, 178, 255));
+        hapusGambarBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        hapusGambarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        hapusGambarBtn.setText("Hapus");
+        hapusGambarBtn.setBorderPainted(false);
+        hapusGambarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hapusGambarBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -442,15 +457,18 @@ public class Mobil extends javax.swing.JFrame {
                                 .addComponent(hargaSewaField)
                                 .addComponent(noPolisiField)))
                         .addGap(89, 89, 89)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(previewGambar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(pilihBtn))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(pilihBtn)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(hapusGambarBtn))
+                                .addComponent(previewGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jSeparator1))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,7 +508,8 @@ public class Mobil extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pilihBtn))))
+                            .addComponent(pilihBtn)
+                            .addComponent(hapusGambarBtn))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -629,6 +648,7 @@ public class Mobil extends javax.swing.JFrame {
             SimpleDateFormat df = new SimpleDateFormat(format_tanggal);
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/mobil-" + tanggal + "." + extension);
+            newImage = destinationFile;
             String destFile = destinationFile.toString();
             String[] iconPath = destFile.split("src");
             gambarField.setText(iconPath[1]);
@@ -719,6 +739,22 @@ public class Mobil extends javax.swing.JFrame {
         new Promo().setVisible(true);
     }//GEN-LAST:event_promoBtnActionPerformed
 
+    private void hapusGambarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusGambarBtnActionPerformed
+        // TODO add your handling code here:
+        if (newImage == null) {
+            JOptionPane.showMessageDialog(null, "Anda belum memilih gambar!");
+        } else {
+            try {
+                Files.delete(newImage.toPath());
+                gambarField.setText(null);
+                previewGambar.setIcon(null);
+                newImage = null;
+            } catch (IOException ex) {
+                Logger.getLogger(Mobil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_hapusGambarBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -763,6 +799,7 @@ public class Mobil extends javax.swing.JFrame {
     private javax.swing.JButton editBtn;
     private javax.swing.JTextField gambarField;
     private javax.swing.JButton hapusBtn;
+    private javax.swing.JButton hapusGambarBtn;
     private javax.swing.JTextField hargaSewaField;
     private javax.swing.JButton homeBtn;
     private javax.swing.JTextField idField;
