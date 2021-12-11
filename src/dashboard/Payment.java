@@ -171,6 +171,11 @@ public class Payment extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -518,8 +523,14 @@ public class Payment extends javax.swing.JFrame {
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Promo().setVisible(true);
+        new User().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Transaksi().setVisible(true);
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments

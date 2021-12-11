@@ -29,7 +29,7 @@ public class Home extends javax.swing.JFrame {
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         countMember();
         countCar();
-        countPromo();
+        countPayment();
         countTransaksi();
     }
     
@@ -63,14 +63,14 @@ public class Home extends javax.swing.JFrame {
         
     }
     
-    private void countPromo() throws SQLException {
+    private void countPayment() throws SQLException {
         try {
-            String query = "SELECT COUNT(*) jumlah_promo FROM promo";
+            String query = "SELECT COUNT(*) jumlah_payment FROM payments";
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             ResultSet rst = pst.executeQuery();
             if (rst.next()) {
-                paymentCount.setText(rst.getString("jumlah_promo"));
+                paymentCount.setText(rst.getString("jumlah_payment"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -108,7 +108,6 @@ public class Home extends javax.swing.JFrame {
         homeBtn = new javax.swing.JButton();
         mobilBtn = new javax.swing.JButton();
         paymentBtn = new javax.swing.JButton();
-        promoBtn = new javax.swing.JButton();
         userBtn = new javax.swing.JButton();
         transaksiBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
@@ -177,20 +176,6 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
-        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        promoBtn.setText("Promo");
-        promoBtn.setBorderPainted(false);
-        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
-            }
-        });
-
         userBtn.setBackground(new java.awt.Color(76, 196, 255));
         userBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         userBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -213,6 +198,11 @@ public class Home extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -249,7 +239,6 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(mobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(paymentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(userBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -273,8 +262,6 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(mobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -525,11 +512,11 @@ public class Home extends javax.swing.JFrame {
         new Payment().setVisible(true);
     }//GEN-LAST:event_paymentBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
+        new Transaksi().setVisible(true);
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -602,7 +589,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton mobilBtn;
     private javax.swing.JButton paymentBtn;
     private javax.swing.JLabel paymentCount;
-    private javax.swing.JButton promoBtn;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JLabel transaksiCount;
     private javax.swing.JButton userBtn;

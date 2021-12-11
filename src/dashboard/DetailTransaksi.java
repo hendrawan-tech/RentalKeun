@@ -139,9 +139,10 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         gambarBukti = new javax.swing.JLabel();
         btnGo = new javax.swing.JButton();
         btnDenda = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("User - Rentalkeun Dashboard");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Detail Transaksi - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -269,51 +270,57 @@ public final class DetailTransaksi extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setBackground(new java.awt.Color(0, 178, 255));
+        backBtn.setForeground(new java.awt.Color(255, 255, 255));
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_arrow.png"))); // NOI18N
+        backBtn.setBorderPainted(false);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(alamat31)
-                                    .addComponent(alamat29))
-                                .addGap(44, 44, 44)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dp)
-                                    .addComponent(subtotal)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnGo)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(alamat)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(noRek))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addComponent(telepon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rekening))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(email)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tanggall))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(nama)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(noOrder))
-                            .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)))))
-                .addContainerGap(174, Short.MAX_VALUE))
+                            .addComponent(alamat31)
+                            .addComponent(alamat29))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dp)
+                            .addComponent(subtotal)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12))
+                        .addComponent(btnGo)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(alamat)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(noRek))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                            .addComponent(telepon)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(rekening))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(email)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tanggall))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(nama)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(noOrder))
+                        .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(221, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -323,11 +330,17 @@ public final class DetailTransaksi extends javax.swing.JFrame {
                         .addGap(306, 306, 306)
                         .addComponent(btnDenda)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(backBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(27, 27, 27)
+                .addComponent(backBtn)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel12))
@@ -366,7 +379,7 @@ public final class DetailTransaksi extends javax.swing.JFrame {
                 .addComponent(btnDenda, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane5.setViewportView(jPanel7);
@@ -375,7 +388,9 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 807, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,7 +401,9 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,6 +449,12 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDendaActionPerformed
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Transaksi().setVisible(true);
+    }//GEN-LAST:event_backBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,6 +470,7 @@ public final class DetailTransaksi extends javax.swing.JFrame {
     private javax.swing.JLabel alamat;
     private javax.swing.JLabel alamat29;
     private javax.swing.JLabel alamat31;
+    private javax.swing.JButton backBtn;
     private javax.swing.JButton btnDenda;
     private javax.swing.JButton btnGo;
     private javax.swing.JLabel dp;

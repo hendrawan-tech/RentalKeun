@@ -40,7 +40,7 @@ public final class Beranda extends javax.swing.JFrame {
             this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
-            setBannerPromo();
+            getDataUser();
             getDataCar();
         }
     }
@@ -82,11 +82,18 @@ public final class Beranda extends javax.swing.JFrame {
         }
     }
 
-    public void setBannerPromo() {
-        Image icon = new ImageIcon(this.getClass().getResource("/ICON/banner_promo.png")).getImage();
-        Image image = icon.getScaledInstance(606, 199, Image.SCALE_SMOOTH);
-        ImageIcon ic = new ImageIcon(image);
-        bannerPromo.setIcon(ic);
+    private void getDataUser() {
+        try {
+            String query = "SELECT * FROM users WHERE id_user = " + Functions.get_id_user();
+            Connection conn = (Connection)Functions.configDB();
+            PreparedStatement pst = conn.prepareStatement(query);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                welcome.setText("Halo, " + res.getString("nama"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "error : " + e);
+        }
     }
 
     /**
@@ -109,7 +116,7 @@ public final class Beranda extends javax.swing.JFrame {
         listMobilBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        welcome = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -260,9 +267,9 @@ public final class Beranda extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jLabel6.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Selamat Datang");
+        welcome.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
+        welcome.setForeground(new java.awt.Color(51, 51, 51));
+        welcome.setText("Halo, Nama");
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -365,7 +372,7 @@ public final class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(imgMobil, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(harga)
@@ -392,6 +399,7 @@ public final class Beranda extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        bannerPromo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_banner.png"))); // NOI18N
         bannerPromo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -401,20 +409,20 @@ public final class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator2)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
+                    .addComponent(welcome)
                     .addComponent(jSeparator1)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bannerPromo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bannerPromo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel6)
+                .addComponent(welcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -439,7 +447,7 @@ public final class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE))
+                .addComponent(jScrollPane1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +610,6 @@ public final class Beranda extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -621,5 +628,6 @@ public final class Beranda extends javax.swing.JFrame {
     private javax.swing.JButton pilihBtn2;
     private javax.swing.JButton profileBtn;
     private javax.swing.JButton transaksiBtn;
+    private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }

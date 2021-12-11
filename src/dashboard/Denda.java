@@ -121,9 +121,10 @@ public class Denda extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         hapusGambarBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Mobil - Rentalkeun Dashboard");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Denda - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -240,48 +241,72 @@ public class Denda extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(0, 178, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_arrow.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tambahBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(hapusBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(editBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(clearBtn))
-                    .addComponent(jLabel11)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_denda, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                            .addComponent(text_harga))
-                        .addGap(89, 89, 89)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap(68, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(txt_denda, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                                .addComponent(text_harga))
+                            .addGap(89, 89, 89)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(pilihBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(hapusGambarBtn))
+                                    .addComponent(previewGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jSeparator1))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(gambarField, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(pilihBtn)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(hapusGambarBtn))
-                                .addComponent(previewGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jSeparator1))
+                                    .addComponent(tambahBtn)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(hapusBtn)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(editBtn)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(clearBtn))
+                                .addComponent(jLabel11))
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel1))
+                .addGap(179, 179, 179))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,7 +340,7 @@ public class Denda extends javax.swing.JFrame {
                     .addComponent(clearBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -323,9 +348,8 @@ public class Denda extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,6 +524,10 @@ public class Denda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_hapusGambarBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -548,6 +576,7 @@ public class Denda extends javax.swing.JFrame {
     private javax.swing.JTextField gambarField;
     private javax.swing.JButton hapusBtn;
     private javax.swing.JButton hapusGambarBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;

@@ -84,7 +84,7 @@ public class Invoice extends javax.swing.JFrame {
     
     private void getOrderItem(String id_order) {
         try {
-            String query = "SELECT * FROM order_items WHERE order_id = '" + id_order + "'";
+            String query = "SELECT * FROM order_items WHERE order_id = '" + id_order + "' AND nama_bukti = 'DP'";
             Connection conn = (Connection)Functions.configDB();
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
