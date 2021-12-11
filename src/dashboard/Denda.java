@@ -347,14 +347,28 @@ public class Denda extends javax.swing.JFrame {
             } else if (text_keterangan.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Area Deskripsi Tidak Boleh Kosong!");
             } else {
-                String query = "INSERT INTO denda (order_id, nama_denda, harga_denda, foto_bukti, keterangan) VALUES "
-                        + "('" + Denda.order_id + "','" + txt_denda.getText() + "', " + text_harga.getText() + ",'" + gambarField.getText() + "'," + "'" + text_keterangan.getText() + "')";
                 Connection conn = (Connection) Functions.configDB();
-                PreparedStatement pst = conn.prepareStatement(query);
-                pst.execute();
-                JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
-                clear();
-                loadTable();
+
+                String query2 = "SELECT * FROM orders WHERE id_order = '" + Denda.order_id + "'";
+                PreparedStatement pst2 = conn.prepareStatement(query2, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                ResultSet res = pst2.executeQuery();
+
+                if (res.next()) {
+                    String query = "INSERT INTO denda (order_id, nama_denda, harga_denda, foto_bukti, keterangan) VALUES "
+                            + "('" + Denda.order_id + "','" + txt_denda.getText() + "', " + text_harga.getText() + ",'" + gambarField.getText() + "'," + "'" + text_keterangan.getText() + "')";
+                    PreparedStatement pst = conn.prepareStatement(query);
+                    pst.execute();
+
+                    int total = Integer.parseInt(res.getString("total")) + Integer.parseInt(text_harga.getText());
+
+                    String query3 = "UPDATE orders SET total = " + total + " WHERE id_order = '" + Denda.order_id + "'";
+                    PreparedStatement pst3 = conn.prepareStatement(query3);
+                    pst3.execute();
+
+                    JOptionPane.showMessageDialog(null, "Berhasil menambahkan data!");
+                    clear();
+                    loadTable();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
