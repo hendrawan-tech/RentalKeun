@@ -417,6 +417,7 @@ public class Payment extends javax.swing.JFrame {
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        Functions.set_email(null);
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 

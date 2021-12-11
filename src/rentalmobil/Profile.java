@@ -533,6 +533,9 @@ public class Profile extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        Functions.set_email(null);
+        new Login().setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

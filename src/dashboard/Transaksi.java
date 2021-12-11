@@ -312,13 +312,14 @@ public class Transaksi extends javax.swing.JFrame {
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        Functions.set_email(null);
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Promo().setVisible(true);
+        new User().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
 
     private void mobilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mobilBtnActionPerformed
