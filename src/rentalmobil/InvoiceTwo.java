@@ -102,9 +102,12 @@ public class InvoiceTwo extends javax.swing.JFrame {
                 merkMobil.setText(res.getString("merk"));
                 tanggalSewa.setText(res.getString("tanggal_penyewaan") + " - " + res.getString("tanggal_pengembalian"));
                 hargaSewa.setText(res.getString("harga_sewa"));
+                
+                int total = Integer.parseInt(res.getString("total")) - Integer.parseInt(res.getString("dp"));
 
-                denda.setText(res.getString("total"));
-                dp.setText(res.getString("dp"));
+                mobil.setText("Rp. " + res.getString("total"));
+                dp.setText("- Rp. " + res.getString("dp"));
+                subtotal.setText("Rp. " + Integer.toString(total));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error : " + e);
@@ -161,9 +164,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
         alamat = new javax.swing.JLabel();
         rekening = new javax.swing.JLabel();
         noRek = new javax.swing.JLabel();
-        alamat2 = new javax.swing.JLabel();
         alamat3 = new javax.swing.JLabel();
-        denda = new javax.swing.JLabel();
         dp = new javax.swing.JLabel();
         namaMobil = new javax.swing.JLabel();
         noPolisi = new javax.swing.JLabel();
@@ -185,9 +186,11 @@ public class InvoiceTwo extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         buktiTransfer = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        subtotal = new javax.swing.JLabel();
+        mobil = new javax.swing.JLabel();
         alamat4 = new javax.swing.JLabel();
         pathDenda = new javax.swing.JLabel();
+        subtotal = new javax.swing.JLabel();
+        alamat5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Invoice - Rentalkeun");
@@ -374,20 +377,10 @@ public class InvoiceTwo extends javax.swing.JFrame {
         noRek.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         noRek.setText("No Rek");
 
-        alamat2.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        alamat2.setForeground(new java.awt.Color(51, 51, 51));
-        alamat2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        alamat2.setText("Denda :");
-
         alamat3.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         alamat3.setForeground(new java.awt.Color(51, 51, 51));
         alamat3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         alamat3.setText("DP :");
-
-        denda.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        denda.setForeground(new java.awt.Color(51, 51, 51));
-        denda.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        denda.setText("Nominal");
 
         dp.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         dp.setForeground(new java.awt.Color(51, 51, 51));
@@ -503,17 +496,27 @@ public class InvoiceTwo extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Bukti Transfer");
 
+        mobil.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        mobil.setForeground(new java.awt.Color(51, 51, 51));
+        mobil.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        mobil.setText("Nominal");
+
+        alamat4.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        alamat4.setForeground(new java.awt.Color(51, 51, 51));
+        alamat4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        alamat4.setText("Mobil + Denda :");
+
+        pathDenda.setForeground(new java.awt.Color(255, 255, 255));
+
         subtotal.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         subtotal.setForeground(new java.awt.Color(204, 204, 0));
         subtotal.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         subtotal.setText("Nominal");
 
-        alamat4.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        alamat4.setForeground(new java.awt.Color(204, 204, 0));
-        alamat4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        alamat4.setText("Subtotal :");
-
-        pathDenda.setForeground(new java.awt.Color(255, 255, 255));
+        alamat5.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        alamat5.setForeground(new java.awt.Color(204, 204, 0));
+        alamat5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        alamat5.setText("Subtotal :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -521,79 +524,80 @@ public class InvoiceTwo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(71, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(alamat)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(noRek))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(alamat4)
+                        .addGap(61, 61, 61)
+                        .addComponent(mobil))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(alamat5)
+                        .addGap(61, 61, 61)
+                        .addComponent(subtotal))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(noTelp)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rekening))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(email)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tanggal))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(namaMember)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(noOrder))
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(merkMobil)
-                                .addComponent(noPolisi)
-                                .addComponent(namaMobil))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(hargaSewa, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tanggalSewa, javax.swing.GroupLayout.Alignment.TRAILING)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(panelPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pathDenda)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(simpanBtn)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(hapusBtn))
+                                    .addComponent(buktiTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel6)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(alamat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(noRek))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(noTelp)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rekening))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(email)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tanggal))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(namaMember)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(noOrder))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(merkMobil)
+                                    .addComponent(noPolisi)
+                                    .addComponent(namaMobil))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(hargaSewa, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tanggalSewa, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(panelPic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pathDenda)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(332, 332, 332)
                                 .addComponent(alamat3)
-                                .addComponent(alamat2))
-                            .addGap(44, 44, 44)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(denda)
-                                .addComponent(dp)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(alamat4)
-                            .addGap(44, 44, 44)
-                            .addComponent(subtotal)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(pilihBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(simpanBtn)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(hapusBtn))
-                                .addComponent(buktiTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6))
-                        .addGap(12, 12, 12)))
-                .addContainerGap(77, Short.MAX_VALUE))
+                                .addGap(61, 61, 61)
+                                .addComponent(dp)))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -661,17 +665,17 @@ public class InvoiceTwo extends javax.swing.JFrame {
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(alamat4)
+                    .addComponent(mobil))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alamat3)
                     .addComponent(dp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alamat2)
-                    .addComponent(denda))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alamat4)
+                    .addComponent(alamat5)
                     .addComponent(subtotal))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel2);
@@ -890,12 +894,11 @@ public class InvoiceTwo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel alamat;
-    private javax.swing.JLabel alamat2;
     private javax.swing.JLabel alamat3;
     private javax.swing.JLabel alamat4;
+    private javax.swing.JLabel alamat5;
     private javax.swing.JButton berandaBtn;
     private javax.swing.JTextField buktiTransfer;
-    private javax.swing.JLabel denda;
     private javax.swing.JLabel dp;
     private javax.swing.JLabel email;
     private javax.swing.JButton hapusBtn;
@@ -921,6 +924,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
     private javax.swing.JButton listMobilBtn;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel merkMobil;
+    private javax.swing.JLabel mobil;
     private javax.swing.JLabel namaMember;
     private javax.swing.JLabel namaMobil;
     private javax.swing.JLabel noOrder;

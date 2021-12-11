@@ -26,7 +26,7 @@ import rentalmobil.Login;
  * @author tohsaka
  */
 public class Transaksi extends javax.swing.JFrame {
-    
+
     public static String idMobil;
     public static String status_transaksi;
 
@@ -44,17 +44,17 @@ public class Transaksi extends javax.swing.JFrame {
             getDataTransaksi(Functions.get_id_user());
         }
     }
-    
+
     private void getDataTransaksi(String user_id) throws SQLException {
         DefaultTableModel model = new DefaultTableModel();
-        
+
         model.addColumn("No");
         model.addColumn("Id Order");
         model.addColumn("Nama Mobil");
         model.addColumn("Tanggal Transaksi");
         model.addColumn("Status");
         model.addColumn("Gambar");
-        
+
         String query = "SELECT * FROM orders o, mobil m WHERE o.id_mobil = m.id_mobil AND o.id_user=" + user_id;
         Connection conn = (Connection) Functions.configDB();
         int no = 1;
@@ -65,18 +65,19 @@ public class Transaksi extends javax.swing.JFrame {
                 model.addRow(new Object[]{no++, res.getString("id_order"), res.getString("nama_mobil"), res.getString("created_at"),
                     res.getString("status"), res.getString("gambar")});
             }
-            res.first();
-            tabelTransaksi.setModel(model);
-            Functions.set_id_order(res.getString("id_order"));
-            namaMobil.setText(res.getString("nama_mobil"));
-            tanggal.setText(res.getString("created_at"));
-            status.setText("Status : " + res.getString("status"));
-            status_transaksi = res.getString("status");
-            path.setText(res.getString("gambar"));
-            Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
-            Image image = icon.getScaledInstance(269, 175, Image.SCALE_SMOOTH);
-            ImageIcon ic = new ImageIcon(image);
-            picMobil.setIcon(ic);
+            if (res.first()) {
+                tabelTransaksi.setModel(model);
+                Functions.set_id_order(res.getString("id_order"));
+                namaMobil.setText(res.getString("nama_mobil"));
+                tanggal.setText(res.getString("created_at"));
+                status.setText("Status : " + res.getString("status"));
+                status_transaksi = res.getString("status");
+                path.setText(res.getString("gambar"));
+                Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
+                Image image = icon.getScaledInstance(269, 175, Image.SCALE_SMOOTH);
+                ImageIcon ic = new ImageIcon(image);
+                picMobil.setIcon(ic);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error : " + e);
         }

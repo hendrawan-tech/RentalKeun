@@ -109,10 +109,8 @@ public class Denda extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         gambarField = new javax.swing.JTextField();
         tambahBtn = new javax.swing.JButton();
-        editBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        hapusBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
         pilihBtn = new javax.swing.JButton();
         previewGambar = new javax.swing.JLabel();
@@ -155,17 +153,6 @@ public class Denda extends javax.swing.JFrame {
             }
         });
 
-        editBtn.setBackground(new java.awt.Color(0, 178, 255));
-        editBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        editBtn.setForeground(new java.awt.Color(255, 255, 255));
-        editBtn.setText("Edit");
-        editBtn.setBorderPainted(false);
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -187,17 +174,6 @@ public class Denda extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-
-        hapusBtn.setBackground(new java.awt.Color(255, 0, 29));
-        hapusBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        hapusBtn.setForeground(new java.awt.Color(255, 255, 255));
-        hapusBtn.setText("Hapus");
-        hapusBtn.setBorderPainted(false);
-        hapusBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hapusBtnActionPerformed(evt);
-            }
-        });
 
         clearBtn.setBackground(new java.awt.Color(0, 178, 255));
         clearBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -284,15 +260,11 @@ public class Denda extends javax.swing.JFrame {
                             .addComponent(jSeparator1))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(tambahBtn)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(hapusBtn)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(editBtn)
-                                    .addGap(42, 42, 42)
-                                    .addComponent(clearBtn))
-                                .addComponent(jLabel11))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(clearBtn)))
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addComponent(jLabel1))
                 .addGap(179, 179, 179))
@@ -335,8 +307,6 @@ public class Denda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambahBtn)
-                    .addComponent(hapusBtn)
-                    .addComponent(editBtn)
                     .addComponent(clearBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,23 +371,6 @@ public class Denda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_tambahBtnActionPerformed
-
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
-        // TODO add your handling code here:
-//        try {
-//            String query = "UPDATE mobil SET nama_mobil='" + txt_denda.getText() + "', "
-//                    + "harga_sewa=" + text_harga.getText() + ", no_polisi='" + noPolisiField.getText() + "', "
-//                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "', '" + text_keterangan.getText() + "' WHERE id_mobil=" + idField.getText();
-//            Connection conn = (Connection) Functions.configDB();
-//            PreparedStatement pst = conn.prepareStatement(query);
-//            pst.execute();
-//            JOptionPane.showMessageDialog(null, "Data berhasil diupdate!");
-//            loadTable();
-//            clear();
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-//        }
-    }//GEN-LAST:event_editBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         // TODO add your handling code here:
@@ -500,10 +453,6 @@ public class Denda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void hapusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusBtnActionPerformed
-
-    }//GEN-LAST:event_hapusBtnActionPerformed
-
     private void txt_dendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_dendaActionPerformed
@@ -573,9 +522,7 @@ public class Denda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearBtn;
-    private javax.swing.JButton editBtn;
     private javax.swing.JTextField gambarField;
-    private javax.swing.JButton hapusBtn;
     private javax.swing.JButton hapusGambarBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
