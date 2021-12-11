@@ -585,7 +585,7 @@ public class Mobil extends javax.swing.JFrame {
         try {
             String query = "UPDATE mobil SET nama_mobil='" + namaMobilField.getText() + "', "
                     + "harga_sewa=" + hargaSewaField.getText() + ", no_polisi='" + noPolisiField.getText() + "', "
-                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "', '" + deskripsiField.getText() + "' WHERE id_mobil=" + idField.getText();
+                    + "gambar='" + gambarField.getText() + "', merk='" + merkField.getText() + "', deskripsi='" + deskripsiField.getText() + "' WHERE id_mobil=" + idField.getText();
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
