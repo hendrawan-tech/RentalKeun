@@ -202,7 +202,6 @@ public class Login extends javax.swing.JFrame {
                 if (result.next()) {
                     if (email.equals(result.getString("email")) && password.equals(result.getString("password"))) {
                         Functions.set_email(result.getString("email"));
-                        JOptionPane.showMessageDialog(null, "Berhasil Login");
                         Functions.set_id_user(result.getString("id_user"));
                         if ("Admin".equals(result.getString("role"))) {
                             this.setVisible(false);

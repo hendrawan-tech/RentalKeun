@@ -187,6 +187,11 @@ public class Detail extends javax.swing.JFrame {
         transaksiBtn.setBorderPainted(false);
         transaksiBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transaksiBtn.setIconTextGap(10);
+        transaksiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transaksiBtnActionPerformed(evt);
+            }
+        });
 
         profileBtn.setBackground(new java.awt.Color(76, 196, 255));
         profileBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -525,6 +530,16 @@ public class Detail extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "error : " + e);
         }
     }//GEN-LAST:event_rentalBtnActionPerformed
+
+    private void transaksiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transaksiBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        try {
+            new Transaksi().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(Detail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_transaksiBtnActionPerformed
 
     /**
      * @param args the command line arguments

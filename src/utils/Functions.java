@@ -20,13 +20,14 @@ public class Functions {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_NAME = "rentalkeun";
-    private static final String USER = "rentalkeun";
-    private static final String PASSWORD = "Bismillah5758";
-    private static final String URL = "jdbc:mysql://db4free.net:3306/" + DB_NAME;
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+    private static final String URL = "jdbc:mysql://localhost:3307/" + DB_NAME;
 
     private static String email;
     private static String id_mobil;
     private static String id_user;
+    private  static String id_order;
 
     public static Connection configDB() throws SQLException {
         DriverManager.registerDriver(new Driver());
@@ -62,6 +63,10 @@ public class Functions {
     public static String get_id_user() {
         return id_user;
     }
+    
+    public static String get_id_order() {
+        return id_order;
+    }
 
     public static void set_email(String data) {
         email = data;
@@ -73,5 +78,9 @@ public class Functions {
     
     public static void set_id_user(String data) {
         id_user = data;
+    }
+    
+    public static  void set_id_order(String data) {
+        id_order = data;
     }
 }

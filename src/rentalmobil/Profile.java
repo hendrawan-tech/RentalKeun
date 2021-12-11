@@ -58,7 +58,7 @@ public class Profile extends javax.swing.JFrame {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
             if (res.next()) {
-                String createdAt = res.getString("created_at");
+                String createdAt = res.getString("bergabung_sejak");
                 String[] splitedCreatedAt = createdAt.split(" ");
                 namaField.setText(res.getString("nama"));
                 emailField.setText(res.getString("email"));
