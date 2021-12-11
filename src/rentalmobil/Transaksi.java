@@ -8,6 +8,7 @@ import dashboard.*;
 import java.awt.Image;
 import utils.Functions;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,6 +49,7 @@ public class Transaksi extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
 
         model.addColumn("No");
+        model.addColumn("Id Order");
         model.addColumn("Nama Mobil");
         model.addColumn("Tanggal Transaksi");
         model.addColumn("Status");
@@ -55,15 +57,25 @@ public class Transaksi extends javax.swing.JFrame {
         
         String query = "SELECT * FROM orders o, mobil m WHERE o.id_mobil = m.id_mobil AND o.id_user=" + user_id;
         Connection conn = (Connection)Functions.configDB();
-        Statement st = conn.createStatement();
         int no = 1;
         try {
-            ResultSet res = st.executeQuery(query);
+            PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res = pst.executeQuery();
             while (res.next()) {
-                model.addRow(new Object[]{no++, res.getString("nama_mobil"), res.getString("created_at"), res.getString("status"),
-                res.getString("gambar")});
+                model.addRow(new Object[]{no++, res.getString("id_order"), res.getString("nama_mobil"), res.getString("created_at"),
+                    res.getString("status"), res.getString("gambar")});
             }
+            res.first();
             tabelTransaksi.setModel(model);
+            Functions.set_id_order(res.getString("id_order"));
+            namaMobil.setText(res.getString("nama_mobil"));
+            tanggal.setText(res.getString("created_at"));
+            status.setText("Status : " + res.getString("status"));
+            path.setText(res.getString("gambar"));
+            Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
+            Image image = icon.getScaledInstance(269, 175, Image.SCALE_SMOOTH);
+            ImageIcon ic = new ImageIcon(image);
+            picMobil.setIcon(ic);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "error : " + e);
         }
@@ -271,6 +283,11 @@ public class Transaksi extends javax.swing.JFrame {
         invoiceButton.setForeground(new java.awt.Color(255, 255, 255));
         invoiceButton.setText("Invoice");
         invoiceButton.setBorderPainted(false);
+        invoiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceButtonActionPerformed(evt);
+            }
+        });
 
         status.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         status.setForeground(new java.awt.Color(51, 51, 51));
@@ -427,30 +444,41 @@ public class Transaksi extends javax.swing.JFrame {
         // TODO add your handling code here:
         int baris = tabelTransaksi.rowAtPoint(evt.getPoint());
         if (tabelTransaksi.getValueAt(baris, 1).toString() == null) {
-            namaMobil.setText("");
+            Functions.set_id_order(null);
         } else {
-            namaMobil.setText(tabelTransaksi.getValueAt(baris, 1).toString());
+            Functions.set_id_order(tabelTransaksi.getValueAt(baris, 1).toString());
         }
         if (tabelTransaksi.getValueAt(baris, 2).toString() == null) {
-            tanggal.setText("");
+            namaMobil.setText("");
         } else {
-            tanggal.setText(tabelTransaksi.getValueAt(baris, 2).toString());
+            namaMobil.setText(tabelTransaksi.getValueAt(baris, 2).toString());
         }
         if (tabelTransaksi.getValueAt(baris, 3).toString() == null) {
-            status.setText("");
+            tanggal.setText("");
         } else {
-            status.setText(tabelTransaksi.getValueAt(baris, 3).toString());
+            tanggal.setText(tabelTransaksi.getValueAt(baris, 3).toString());
         }
         if (tabelTransaksi.getValueAt(baris, 4).toString() == null) {
+            status.setText("");
+        } else {
+            status.setText("Status : " + tabelTransaksi.getValueAt(baris, 4).toString());
+        }
+        if (tabelTransaksi.getValueAt(baris, 5).toString() == null) {
             picMobil.setIcon(null);
         } else {
-            path.setText(tabelTransaksi.getValueAt(baris, 4).toString());
+            path.setText(tabelTransaksi.getValueAt(baris, 5).toString());
             Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
-            Image image = icon.getScaledInstance(345, 222, Image.SCALE_SMOOTH);
+            Image image = icon.getScaledInstance(269, 175, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
             picMobil.setIcon(ic);
         }
     }//GEN-LAST:event_tabelTransaksiMouseClicked
+
+    private void invoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Invoice().setVisible(true);
+    }//GEN-LAST:event_invoiceButtonActionPerformed
 
     /**
      * @param args the command line arguments
