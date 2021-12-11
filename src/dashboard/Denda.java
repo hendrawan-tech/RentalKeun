@@ -267,7 +267,7 @@ public class Denda extends javax.swing.JFrame {
                                     .addComponent(clearBtn)))
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addComponent(jLabel1))
-                .addGap(179, 179, 179))
+                .addContainerGap(116, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jButton1)
@@ -309,8 +309,8 @@ public class Denda extends javax.swing.JFrame {
                     .addComponent(tambahBtn)
                     .addComponent(clearBtn))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
