@@ -805,7 +805,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
             Image icon = ImageIO.read(file);
             Image image = icon.getScaledInstance(306, 202, Image.SCALE_SMOOTH);
             ImageIcon ic = new ImageIcon(image);
-            picDenda.setIcon(ic);
+            picBuktiTransfer.setIcon(ic);
 
             filename = file.getAbsolutePath();
 
