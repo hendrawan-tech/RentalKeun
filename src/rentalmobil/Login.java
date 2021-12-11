@@ -82,6 +82,7 @@ public class Login extends javax.swing.JFrame {
         jLabel9.setText("Password");
 
         btn_login.setBackground(new java.awt.Color(255, 255, 255));
+        btn_login.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         btn_login.setForeground(new java.awt.Color(51, 51, 51));
         btn_login.setText("Login");
         btn_login.setBorderPainted(false);
@@ -124,7 +125,7 @@ public class Login extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(97, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)

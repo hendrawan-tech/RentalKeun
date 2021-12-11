@@ -239,6 +239,8 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        gambarBukti.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         btnGo.setBackground(new java.awt.Color(76, 196, 255));
         btnGo.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         btnGo.setForeground(new java.awt.Color(255, 255, 255));
@@ -422,28 +424,6 @@ public final class DetailTransaksi extends javax.swing.JFrame {
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
-
-            String query2 = "SELECT * FROM orders WHERE id_order = '" + DetailTransaksi.idOrder + "'";
-            PreparedStatement pst2 = conn.prepareStatement(query2, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            ResultSet res = pst2.executeQuery();
-
-            System.out.println(res);
-
-            if (res.next()) {
-                if (res.getString("status").equals("DP")) {
-                    String query3 = "UPDATE orders SET status = 'Tidak Lunas' WHERE id_order = '" + DetailTransaksi.idOrder + "'";
-                    PreparedStatement pst3 = conn.prepareStatement(query3);
-                    pst3.execute();
-                } else if (res.getString("status").equals("Tidak Lunas")) {
-                    String query3 = "UPDATE orders SET status = 'Lunas' WHERE id_order = '" + DetailTransaksi.idOrder + "'";
-                    PreparedStatement pst3 = conn.prepareStatement(query3);
-                    pst3.execute();
-                    btnGo.setVisible(false);
-                } else if (res.getString("status").equals("Lunas")) {
-                    btnGo.setVisible(false);
-                }
-            }
-
             btnDenda.setVisible(false);
             JOptionPane.showMessageDialog(null, "Data berhasil diupdate!");
             loadTable(DetailTransaksi.idOrder);

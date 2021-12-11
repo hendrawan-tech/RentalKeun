@@ -83,7 +83,6 @@ public class User extends javax.swing.JFrame {
         homeBtn = new javax.swing.JButton();
         mobilBtn = new javax.swing.JButton();
         paymentBtn = new javax.swing.JButton();
-        promoBtn = new javax.swing.JButton();
         userBtn = new javax.swing.JButton();
         transaksiBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
@@ -159,20 +158,6 @@ public class User extends javax.swing.JFrame {
             }
         });
 
-        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
-        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        promoBtn.setText("Promo");
-        promoBtn.setBorderPainted(false);
-        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
-            }
-        });
-
         userBtn.setBackground(new java.awt.Color(76, 196, 255));
         userBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         userBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,7 +208,6 @@ public class User extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(mobilBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(paymentBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(userBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                             .addComponent(homeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,12 +235,10 @@ public class User extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
@@ -434,7 +416,7 @@ public class User extends javax.swing.JFrame {
                     .addComponent(clearBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -587,12 +569,6 @@ public class User extends javax.swing.JFrame {
         new Payment().setVisible(true);
     }//GEN-LAST:event_paymentBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -661,7 +637,6 @@ public class User extends javax.swing.JFrame {
     private javax.swing.JTextField namaField;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JButton paymentBtn;
-    private javax.swing.JButton promoBtn;
     private javax.swing.ButtonGroup roleGroup;
     private javax.swing.JButton tambahBtn;
     private javax.swing.JButton transaksiBtn;

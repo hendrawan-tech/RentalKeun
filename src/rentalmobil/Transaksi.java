@@ -28,11 +28,11 @@ import rentalmobil.Login;
 public class Transaksi extends javax.swing.JFrame {
     
     public static String idMobil;
+    public static String status_transaksi;
 
     /**
      * Creates new form Payment
      */
-    
     public Transaksi() throws SQLException {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
@@ -47,7 +47,7 @@ public class Transaksi extends javax.swing.JFrame {
     
     private void getDataTransaksi(String user_id) throws SQLException {
         DefaultTableModel model = new DefaultTableModel();
-
+        
         model.addColumn("No");
         model.addColumn("Id Order");
         model.addColumn("Nama Mobil");
@@ -56,7 +56,7 @@ public class Transaksi extends javax.swing.JFrame {
         model.addColumn("Gambar");
         
         String query = "SELECT * FROM orders o, mobil m WHERE o.id_mobil = m.id_mobil AND o.id_user=" + user_id;
-        Connection conn = (Connection)Functions.configDB();
+        Connection conn = (Connection) Functions.configDB();
         int no = 1;
         try {
             PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -71,6 +71,7 @@ public class Transaksi extends javax.swing.JFrame {
             namaMobil.setText(res.getString("nama_mobil"));
             tanggal.setText(res.getString("created_at"));
             status.setText("Status : " + res.getString("status"));
+            status_transaksi = res.getString("status");
             path.setText(res.getString("gambar"));
             Image icon = new ImageIcon(this.getClass().getResource(path.getText())).getImage();
             Image image = icon.getScaledInstance(269, 175, Image.SCALE_SMOOTH);
@@ -94,7 +95,6 @@ public class Transaksi extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         berandaBtn = new javax.swing.JButton();
-        promoBtn = new javax.swing.JButton();
         transaksiBtn = new javax.swing.JButton();
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
@@ -133,20 +133,6 @@ public class Transaksi extends javax.swing.JFrame {
         berandaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 berandaBtnActionPerformed(evt);
-            }
-        });
-
-        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
-        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        promoBtn.setText("Promo");
-        promoBtn.setBorderPainted(false);
-        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
             }
         });
 
@@ -220,7 +206,6 @@ public class Transaksi extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -243,8 +228,6 @@ public class Transaksi extends javax.swing.JFrame {
                 .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -403,12 +386,6 @@ public class Transaksi extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Info().setVisible(true);
@@ -460,7 +437,9 @@ public class Transaksi extends javax.swing.JFrame {
         }
         if (tabelTransaksi.getValueAt(baris, 4).toString() == null) {
             status.setText("");
+            status_transaksi = null;
         } else {
+            status_transaksi = tabelTransaksi.getValueAt(baris, 4).toString();
             status.setText("Status : " + tabelTransaksi.getValueAt(baris, 4).toString());
         }
         if (tabelTransaksi.getValueAt(baris, 5).toString() == null) {
@@ -476,8 +455,13 @@ public class Transaksi extends javax.swing.JFrame {
 
     private void invoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new Invoice().setVisible(true);
+        if (status_transaksi.equals("DP")) {
+            this.setVisible(false);
+            new Invoice().setVisible(true);
+        } else if (status_transaksi.equals("Tidak Lunas")) {
+            this.setVisible(false);
+            new InvoiceTwo().setVisible(true);
+        }
     }//GEN-LAST:event_invoiceButtonActionPerformed
 
     /**
@@ -540,7 +524,6 @@ public class Transaksi extends javax.swing.JFrame {
     private javax.swing.JLabel path;
     private javax.swing.JLabel picMobil;
     private javax.swing.JButton profileBtn;
-    private javax.swing.JButton promoBtn;
     private javax.swing.JLabel status;
     private javax.swing.JTable tabelTransaksi;
     private javax.swing.JLabel tanggal;

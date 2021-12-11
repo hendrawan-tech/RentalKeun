@@ -70,7 +70,7 @@ public class Home extends javax.swing.JFrame {
             PreparedStatement pst = conn.prepareStatement(query);
             ResultSet rst = pst.executeQuery();
             if (rst.next()) {
-                promoCount.setText(rst.getString("jumlah_promo"));
+                paymentCount.setText(rst.getString("jumlah_promo"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -123,7 +123,7 @@ public class Home extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        promoCount = new javax.swing.JLabel();
+        paymentCount = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -366,13 +366,13 @@ public class Home extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("SF Pro Display Medium", 0, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Promo");
+        jLabel8.setText("Payment");
 
-        promoCount.setFont(new java.awt.Font("SF Pro Display Medium", 0, 56)); // NOI18N
-        promoCount.setForeground(new java.awt.Color(255, 255, 255));
-        promoCount.setText("0");
+        paymentCount.setFont(new java.awt.Font("SF Pro Display Medium", 0, 56)); // NOI18N
+        paymentCount.setForeground(new java.awt.Color(255, 255, 255));
+        paymentCount.setText("0");
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/stat_3.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/stat_4.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -384,7 +384,7 @@ public class Home extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(promoCount))
+                    .addComponent(paymentCount))
                 .addGap(22, 22, 22))
         );
         jPanel6Layout.setVerticalGroup(
@@ -395,7 +395,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(promoCount, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(paymentCount, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
                 .addGap(46, 46, 46))
@@ -492,8 +492,6 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        getAccessibleContext().setAccessibleName("Home - Rentalkeun Dashboard");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -603,8 +601,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton mobilBtn;
     private javax.swing.JButton paymentBtn;
+    private javax.swing.JLabel paymentCount;
     private javax.swing.JButton promoBtn;
-    private javax.swing.JLabel promoCount;
     private javax.swing.JButton transaksiBtn;
     private javax.swing.JLabel transaksiCount;
     private javax.swing.JButton userBtn;

@@ -98,7 +98,6 @@ public class ListMobil extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         berandaBtn = new javax.swing.JButton();
-        promoBtn = new javax.swing.JButton();
         transaksiBtn = new javax.swing.JButton();
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
@@ -132,20 +131,6 @@ public class ListMobil extends javax.swing.JFrame {
         berandaBtn.setBorderPainted(false);
         berandaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         berandaBtn.setIconTextGap(10);
-
-        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
-        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        promoBtn.setText("Promo");
-        promoBtn.setBorderPainted(false);
-        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
-            }
-        });
 
         transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
         transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
@@ -217,7 +202,6 @@ public class ListMobil extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -240,8 +224,6 @@ public class ListMobil extends javax.swing.JFrame {
                 .addComponent(berandaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -377,12 +359,6 @@ public class ListMobil extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Info().setVisible(true);
@@ -499,7 +475,6 @@ public class ListMobil extends javax.swing.JFrame {
     private javax.swing.JLabel path;
     private javax.swing.JLabel previewMobil;
     private javax.swing.JButton profileBtn;
-    private javax.swing.JButton promoBtn;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }

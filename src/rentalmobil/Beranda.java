@@ -102,7 +102,6 @@ public final class Beranda extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         berandaBtn = new javax.swing.JButton();
-        promoBtn = new javax.swing.JButton();
         transaksiBtn = new javax.swing.JButton();
         profileBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
@@ -148,20 +147,6 @@ public final class Beranda extends javax.swing.JFrame {
         berandaBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         berandaBtn.setIconTextGap(10);
 
-        promoBtn.setBackground(new java.awt.Color(76, 196, 255));
-        promoBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        promoBtn.setForeground(new java.awt.Color(255, 255, 255));
-        promoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_discount.png"))); // NOI18N
-        promoBtn.setText("Promo");
-        promoBtn.setBorderPainted(false);
-        promoBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        promoBtn.setIconTextGap(10);
-        promoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                promoBtnActionPerformed(evt);
-            }
-        });
-
         transaksiBtn.setBackground(new java.awt.Color(76, 196, 255));
         transaksiBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
         transaksiBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -192,6 +177,7 @@ public final class Beranda extends javax.swing.JFrame {
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
+        logoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_exit.png"))); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.setBorderPainted(false);
@@ -236,7 +222,6 @@ public final class Beranda extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(promoBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(transaksiBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(profileBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(berandaBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -260,8 +245,6 @@ public final class Beranda extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(listMobilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(promoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(transaksiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(profileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,7 +262,7 @@ public final class Beranda extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("SF Pro Display Medium", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Promo Saat Ini");
+        jLabel6.setText("Selamat Datang");
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
@@ -486,12 +469,6 @@ public final class Beranda extends javax.swing.JFrame {
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void promoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promoBtnActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Promo().setVisible(true);
-    }//GEN-LAST:event_promoBtnActionPerformed
-
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
         new Info().setVisible(true);
@@ -643,7 +620,6 @@ public final class Beranda extends javax.swing.JFrame {
     private javax.swing.JButton pilihBtn;
     private javax.swing.JButton pilihBtn2;
     private javax.swing.JButton profileBtn;
-    private javax.swing.JButton promoBtn;
     private javax.swing.JButton transaksiBtn;
     // End of variables declaration//GEN-END:variables
 }

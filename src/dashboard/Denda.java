@@ -347,6 +347,9 @@ public class Denda extends javax.swing.JFrame {
             } else if (text_keterangan.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Text Area Deskripsi Tidak Boleh Kosong!");
             } else {
+                String query = "INSERT INTO denda (order_id, nama_denda, harga_denda, foto_bukti, keterangan) VALUES "
+                        + "('" + Denda.order_id + "','" + txt_denda.getText() + "', " + text_harga.getText() + ",'" + gambarField.getText() + "'," + "'" + text_keterangan.getText() + "')";
+
                 Connection conn = (Connection) Functions.configDB();
 
                 String query2 = "SELECT * FROM orders WHERE id_order = '" + Denda.order_id + "'";
