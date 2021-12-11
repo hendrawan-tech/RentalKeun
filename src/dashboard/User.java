@@ -29,6 +29,7 @@ public class User extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         loadTable();
         idField.disable();
     }

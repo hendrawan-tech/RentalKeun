@@ -17,6 +17,7 @@ public class Info extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+        this.setResizable(false);
     }
 
     /**

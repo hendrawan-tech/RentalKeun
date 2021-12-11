@@ -97,7 +97,7 @@ public class Transaksi extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("User - Rentalkeun Dashboard");
+        setTitle("Transaksi - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

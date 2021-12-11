@@ -29,6 +29,7 @@ public class Promo extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
         loadTable();
         idField.disable();
     }
@@ -109,7 +110,7 @@ public class Promo extends javax.swing.JFrame {
         cariBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("User - Rentalkeun Dashboard");
+        setTitle("Promo - Rentalkeun Dashboard");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
