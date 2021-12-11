@@ -357,9 +357,9 @@ public class Denda extends javax.swing.JFrame {
                 ResultSet res = pst2.executeQuery();
 
                 if (res.next()) {
-                    String query = "INSERT INTO denda (order_id, nama_denda, harga_denda, foto_bukti, keterangan) VALUES "
+                    String result = "INSERT INTO denda (order_id, nama_denda, harga_denda, foto_bukti, keterangan) VALUES "
                             + "('" + Denda.order_id + "','" + txt_denda.getText() + "', " + text_harga.getText() + ",'" + gambarField.getText() + "'," + "'" + text_keterangan.getText() + "')";
-                    PreparedStatement pst = conn.prepareStatement(query);
+                    PreparedStatement pst = conn.prepareStatement(result);
                     pst.execute();
 
                     int total = Integer.parseInt(res.getString("total")) + Integer.parseInt(text_harga.getText());
