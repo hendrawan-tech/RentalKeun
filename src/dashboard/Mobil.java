@@ -32,7 +32,7 @@ import rentalmobil.Login;
  * @author tohsaka
  */
 public class Mobil extends javax.swing.JFrame {
-    
+
     public static File newImage;
 
     /**
@@ -53,8 +53,7 @@ public class Mobil extends javax.swing.JFrame {
         jTable1.getTableHeader().setForeground(new Color(0, 0, 0));
         jTable1.getTableHeader().setOpaque(false);
         jTable1.setRowHeight(25);
-        
-        
+
         DefaultTableModel model = new DefaultTableModel();
 
         model.addColumn("No");
@@ -73,7 +72,7 @@ public class Mobil extends javax.swing.JFrame {
             Statement stm = conn.createStatement();
             ResultSet res = stm.executeQuery(sql);
             while (res.next()) {
-                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3), 
+                model.addRow(new Object[]{no++, res.getString(1), res.getString(2), res.getString(3),
                     res.getString(4), res.getString(5), res.getString(6), res.getString(7)});
             }
             jTable1.setModel(model);
@@ -566,7 +565,7 @@ public class Mobil extends javax.swing.JFrame {
             } else {
                 String query = "INSERT INTO mobil (nama_mobil, harga_sewa, no_polisi, gambar, merk, deskripsi) VALUES "
                         + "('" + namaMobilField.getText() + "', " + hargaSewaField.getText() + ", '"
-                        + noPolisiField.getText() + "', '" + gambarField.getText() + "', '" + merkField.getText() + "', "
+                        + noPolisiField.getText() + "', '/mobil" + gambarField.getText() + "', '" + merkField.getText() + "', "
                         + "'" + deskripsiField.getText() + "')";
                 Connection conn = (Connection) Functions.configDB();
                 PreparedStatement pst = conn.prepareStatement(query);
@@ -637,9 +636,7 @@ public class Mobil extends javax.swing.JFrame {
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/mobil-" + tanggal + "." + extension);
             newImage = destinationFile;
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            gambarField.setText(iconPath[1]);
+            gambarField.setText("/mobil-" + tanggal + "." + extension);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
 
         } catch (Exception e) {
@@ -747,33 +744,6 @@ public class Mobil extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Mobil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Mobil().setVisible(true);

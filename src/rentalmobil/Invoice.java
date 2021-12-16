@@ -29,14 +29,13 @@ import javax.swing.JOptionPane;
  * @author tohsaka
  */
 public class Invoice extends javax.swing.JFrame {
-    
+
     public static String idMobil;
     public static File pathBuktiTransfer;
 
     /**
      * Creates new form Payment
      */
-    
     public Invoice() {
         if (Functions.get_email() == null) {
             JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu!");
@@ -49,12 +48,12 @@ public class Invoice extends javax.swing.JFrame {
             getOrderItem(Functions.get_id_order());
         }
     }
-    
+
     private void getDataInvoice(String id_order) {
         try {
             String query = "SELECT * FROM orders o JOIN users u ON o.id_user = u.id_user JOIN payments p ON o.id_payment = p.id_payment "
                     + "JOIN mobil m ON o.id_mobil = m.id_mobil JOIN user_meta um ON o.id_user = um.user_id WHERE o.id_order = '" + id_order + "'";
-            Connection conn = (Connection)Functions.configDB();
+            Connection conn = (Connection) Functions.configDB();
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
             if (res.next()) {
@@ -62,18 +61,18 @@ public class Invoice extends javax.swing.JFrame {
                 email.setText(res.getString("email"));
                 noTelp.setText(res.getString("no_telepon"));
                 alamat.setText(res.getString("alamat"));
-                
+
                 noOrder.setText("No. " + res.getString("id_order"));
                 tanggal.setText("Tanggal : " + res.getString("created_at"));
                 rekening.setText("Transfer : " + res.getString("nama"));
                 noRek.setText("No Rek : " + res.getString("no_rekening"));
-                
+
                 namaMobil.setText(res.getString("nama_mobil"));
                 noPolisi.setText(res.getString("no_polisi"));
                 merkMobil.setText(res.getString("merk"));
                 tanggalSewa.setText(res.getString("tanggal_penyewaan") + " - " + res.getString("tanggal_pengembalian"));
                 hargaSewa.setText(res.getString("harga_sewa"));
-                
+
                 subtotal.setText(res.getString("total"));
                 dp.setText(res.getString("dp"));
             }
@@ -81,11 +80,11 @@ public class Invoice extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "error : " + e);
         }
     }
-    
+
     private void getOrderItem(String id_order) {
         try {
             String query = "SELECT * FROM order_items WHERE order_id = '" + id_order + "' AND nama_bukti = 'DP'";
-            Connection conn = (Connection)Functions.configDB();
+            Connection conn = (Connection) Functions.configDB();
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
             if (res.next()) {
@@ -675,9 +674,7 @@ public class Invoice extends javax.swing.JFrame {
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/buktitf-" + tanggal + "." + extension);
             pathBuktiTransfer = destinationFile;
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            buktiTransfer.setText(iconPath[1]);
+            buktiTransfer.setText("/buktitf-" + tanggal + "." + extension);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
 
         } catch (Exception e) {
@@ -707,14 +704,14 @@ public class Invoice extends javax.swing.JFrame {
             simpanBtn.disable();
         } else {
             try {
-            String query = "INSERT INTO order_items (order_id, gambar_bukti) VALUES ('" + Functions.get_id_order() + "','" + buktiTransfer.getText() + "')";
-            Connection conn = (Connection)Functions.configDB();
-            PreparedStatement pst = conn.prepareStatement(query);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Bukti transfer berhasil disimpan!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "error : " + e);
-        }
+                String query = "INSERT INTO order_items (order_id, gambar_bukti) VALUES ('" + Functions.get_id_order() + "','/buktitf" + buktiTransfer.getText() + "')";
+                Connection conn = (Connection) Functions.configDB();
+                PreparedStatement pst = conn.prepareStatement(query);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Bukti transfer berhasil disimpan!");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "error : " + e);
+            }
         }
     }//GEN-LAST:event_simpanBtnActionPerformed
 

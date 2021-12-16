@@ -102,7 +102,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
                 merkMobil.setText(res.getString("merk"));
                 tanggalSewa.setText(res.getString("tanggal_penyewaan") + " - " + res.getString("tanggal_pengembalian"));
                 hargaSewa.setText(res.getString("harga_sewa"));
-                
+
                 int total = Integer.parseInt(res.getString("total")) - Integer.parseInt(res.getString("dp"));
 
                 mobil.setText("Rp. " + res.getString("total"));
@@ -245,7 +245,6 @@ public class InvoiceTwo extends javax.swing.JFrame {
 
         logoutBtn.setBackground(new java.awt.Color(255, 255, 255));
         logoutBtn.setFont(new java.awt.Font("SF Pro Display Medium", 1, 15)); // NOI18N
-        logoutBtn.setForeground(new java.awt.Color(0, 0, 0));
         logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/rentalkeun_exit.png"))); // NOI18N
         logoutBtn.setText("Log Out");
         logoutBtn.setBorderPainted(false);
@@ -664,7 +663,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(alamat4)
                     .addComponent(mobil))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -672,7 +671,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
                     .addComponent(alamat3)
                     .addComponent(dp))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(alamat5)
                     .addComponent(subtotal))
                 .addContainerGap(129, Short.MAX_VALUE))
@@ -780,7 +779,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
             simpanBtn.disable();
         } else {
             try {
-                String query = "INSERT INTO order_items (order_id, gambar_bukti, nama_bukti) VALUES ('" + Functions.get_id_order() + "','" + buktiTransfer.getText() + "', 'Total')";
+                String query = "INSERT INTO order_items (order_id, gambar_bukti, nama_bukti) VALUES ('" + Functions.get_id_order() + "', '/buktitf" + buktiTransfer.getText() + "', 'Total')";
                 Connection conn = (Connection) Functions.configDB();
                 PreparedStatement pst = conn.prepareStatement(query);
                 pst.execute();
@@ -826,9 +825,7 @@ public class InvoiceTwo extends javax.swing.JFrame {
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/buktitf-" + tanggal + "." + extension);
             pathBuktiTransfer = destinationFile;
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            buktiTransfer.setText(iconPath[1]);
+            buktiTransfer.setText("/buktitf-" + tanggal + "." + extension);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
 
         } catch (Exception e) {

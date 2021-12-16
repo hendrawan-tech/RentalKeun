@@ -47,7 +47,7 @@ public final class DetailTransaksi extends javax.swing.JFrame {
 
     public void getData(String id) {
         try {
-            String query = "SELECT orders.*, users.*, payments.*, user_meta.*, payments.nama AS nama_bank, users.nama AS nama_user FROM orders, users, payments, user_meta\n"
+            String query = "SELECT orders.*, users.*, payments.*, user_meta.*, payments.nama AS nama_bank, users.nama AS nama_user FROM orders, users, payments, user_meta "
                     + "WHERE orders.id_user = users.id_user AND users.id_user = user_meta.user_id AND orders.id_payment = payments.id_payment AND orders.id_order = '" + id + "'";
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -422,7 +422,10 @@ public final class DetailTransaksi extends javax.swing.JFrame {
         DetailTransaksi.path = jTable1.getValueAt(baris, 4).toString();
         DetailTransaksi.statusBukti = jTable1.getValueAt(baris, 5).toString();
 
-        Image icon = new ImageIcon(this.getClass().getResource(DetailTransaksi.path)).getImage();
+        System.out.println(DetailTransaksi.path);
+
+        Image icon;
+        icon = new ImageIcon(this.getClass().getResource(DetailTransaksi.path)).getImage();
         Image image = icon.getScaledInstance(345, 222, Image.SCALE_SMOOTH);
         ImageIcon ic = new ImageIcon(image);
         gambarBukti.setIcon(ic);
@@ -440,7 +443,7 @@ public final class DetailTransaksi extends javax.swing.JFrame {
             Connection conn = (Connection) Functions.configDB();
             PreparedStatement pst = conn.prepareStatement(query);
             pst.execute();
-            
+
             String query2 = "SELECT * FROM orders WHERE id_order = '" + DetailTransaksi.idOrder + "'";
             PreparedStatement pst2 = conn.prepareStatement(query2, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             ResultSet res = pst2.executeQuery();

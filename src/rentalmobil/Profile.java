@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
  * @author tohsaka
  */
 public class Profile extends javax.swing.JFrame {
-    
+
     public static File pathGambarKtp;
     public static File pathGambarSim;
 
@@ -586,9 +586,7 @@ public class Profile extends javax.swing.JFrame {
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/ktp-" + tanggal + "." + extension);
             pathGambarKtp = destinationFile;
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            ktpField.setText(iconPath[1]);
+            ktpField.setText("/ktp-" + tanggal + "." + extension);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
 
         } catch (Exception e) {
@@ -631,9 +629,7 @@ public class Profile extends javax.swing.JFrame {
             String tanggal = String.valueOf(df.format(tanggal_update));
             destinationFile = new File(newpath + "/sim-" + tanggal + "." + extension);
             pathGambarSim = destinationFile;
-            String destFile = destinationFile.toString();
-            String[] iconPath = destFile.split("src");
-            simField.setText(iconPath[1]);
+            simField.setText("/sim-" + tanggal + "." + extension);
             Files.copy(sourceFile.toPath(), destinationFile.toPath());
 
         } catch (Exception e) {
@@ -649,8 +645,8 @@ public class Profile extends javax.swing.JFrame {
             Statement st = conn.createStatement();
             ResultSet res = st.executeQuery(query);
             if (res.next()) {
-                String query2 = "INSERT INTO user_meta (user_id, no_telepon, foto_ktp, foto_sim, alamat) VALUES ('" + res.getString("id_user") + "', '" + noTeleponField.getText() + "', '"
-                        + ktpField.getText() + "', '" + simField.getText() + "', '" + alamatField.getText() + "')";
+                String query2 = "INSERT INTO user_meta (user_id, no_telepon, foto_ktp, foto_sim, alamat) VALUES ('" + res.getString("id_user") + "', '" + noTeleponField.getText() + "', '/ktp"
+                        + ktpField.getText() + "', '/sim" + simField.getText() + "', '" + alamatField.getText() + "')";
                 PreparedStatement pst = conn.prepareStatement(query2);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Data Diri Berhasil Disimpan!");
@@ -724,52 +720,11 @@ public class Profile extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Profile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Profile().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new Profile().setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
